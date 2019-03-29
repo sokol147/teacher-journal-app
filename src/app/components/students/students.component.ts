@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Student } from '../../../common/entities/index';
 
 @Component({
   selector: 'app-students',
@@ -7,14 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentsComponent implements OnInit {
 
-  students = [
-    {id: 1, name: 'Vasya', lastName: 'Notvasya', address: 'st.Maks 14', description: 'Live in...'},
-    {id: 2, name: 'Luck', lastName: 'Oms', address: 'st.Stir 48', description: 'Have a power'}
-  ]
-
   constructor() { }
 
   ngOnInit() {
   }
 
+  @Input() students: Student[];
 }
