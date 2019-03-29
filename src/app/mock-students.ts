@@ -1,4 +1,4 @@
-import { Student } from '../common/entities/student';
+import { Student } from '../common/entities';
 
 export const STUDENTS: Student[] = [
   {id: 1, name: 'Vasya', lastName: 'Notvasya', address: 'st.Maks 14', description: 'Live in...'},
