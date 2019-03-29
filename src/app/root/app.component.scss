@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .header{
   text-align: center;
 }
@@ -6,11 +8,11 @@
   display: flex;
   justify-content: center;
   &__item{
-    color: #fff;
+    color: $white;
     display: inline-block;
     padding: 10px;
     text-decoration: none;
-    background: dimgray;
+    background: $lightGrey;
     border-radius: 5px;
     transition: .3s;
     font-weight: bold;
@@ -18,8 +20,8 @@
       margin-right: 1rem;
     }
     &:hover{
-      color: rgb(197, 129, 3);
-      background: darken(dimgray, 10%);
+      color: orange;
+      background: darken($lightGrey, 10%);
     }
   }
 }
