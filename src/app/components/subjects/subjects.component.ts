@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Subject } from 'src/common/entities';
 
 @Component({
   selector: 'app-subjects',
@@ -12,4 +13,5 @@ export class SubjectsComponent implements OnInit {
   ngOnInit() {
   }
 
+  @Input() subjects: Subject[];
 }
