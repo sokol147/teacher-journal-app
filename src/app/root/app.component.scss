@@ -1,0 +1,25 @@
+.header{
+  text-align: center;
+}
+
+.nav{
+  display: flex;
+  justify-content: center;
+  &__item{
+    color: #fff;
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    background: dimgray;
+    border-radius: 5px;
+    transition: .3s;
+    font-weight: bold;
+    &:not(:last-child){
+      margin-right: 1rem;
+    }
+    &:hover{
+      color: rgb(197, 129, 3);
+      background: darken(dimgray, 10%);
+    }
+  }
+}
