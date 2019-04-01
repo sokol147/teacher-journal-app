@@ -1,16 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <header>
   <div>
     <h1 class="header">{{title}}</h1>
   </div>
   <nav class="nav">
-    <a href="" class="nav__item">Students</a>
-    <a href="" class="nav__item">Subjects</a>
+    <a routerLink='/students' class="nav__item">Students</a>
+    <a routerLink='/subjects' class="nav__item">Subjects</a>
   </nav>
 </header>
-<main>
-  <app-students [students]="students"></app-students>
-  <app-subjects [subjects]="subjects"></app-subjects>
+<main style="padding: 0 15px;">
+  <!-- <app-students [students]="students"></app-students>
+  <app-subjects [subjects]="subjects"></app-subjects> -->
   <router-outlet></router-outlet>
 </main>
 

@@ -1,7 +1,7 @@
-export class Subject{
-  id: number;
-  name: string;
-  teacher: string;
-  cabinet?: number;
-  description?: string;
+export class Subject {
+  public id: number;
+  public name: string;
+  public teacher: string;
+  public cabinet?: number;
+  public description?: string;
 }

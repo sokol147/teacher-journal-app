@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+
+import { Student } from "../entities";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-export class StudentsService {
-
-  constructor() { }
-}
+export class StudentsService { }

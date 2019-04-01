@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
-import { ButtonComponent } from '../shared/components/button/button.component';
-import { FormComponent } from '../shared/components/form/form.component';
+import { ButtonComponent } from "../shared/components/button/button.component";
+import { FormComponent } from "../shared/components/form/form.component";
 
 @NgModule({
   imports: [ CommonModule ],

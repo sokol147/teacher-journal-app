@@ -1,8 +1,8 @@
-export class Student{
-  id: number;
-  name: string;
-  lastName: string;
-  address?: string;
-  description?: string;
-  marks?: object[];
+export class Student {
+  public id: number;
+  public name: string;
+  public lastName: string;
+  public address?: string;
+  public description?: string;
+  public marks?: object[];
 }
