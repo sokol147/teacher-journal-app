@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Student } from "../../../common/entities/index";
 
-import { STUDENTS } from "../../../app/mock-students";
+import { Student } from '../../../common/entities';
+
+import { StudentService } from '../../../common/services/students.service';
 
 @Component({
   selector: "app-students",
@@ -10,12 +11,17 @@ import { STUDENTS } from "../../../app/mock-students";
 })
 export class StudentsComponent implements OnInit {
 
-  public students: Student[] = STUDENTS;
+  students: Student[];
 
-  constructor() { }
+  constructor( private studentService: StudentService) { }
 
   public ngOnInit(): void {
+    this.getStudents();
+  }
 
+  getStudents(): void{
+    this.studentService.getStudents()
+      .subscribe(students => this.students = students);
   }
 
   // @Input() students: Student[];
