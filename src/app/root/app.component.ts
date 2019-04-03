@@ -10,7 +10,7 @@ import { SUBJECTS } from "../mock-subjects";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  public title = "Teacher Journal";
+  public title: string = "Teacher Journal";
 
   public students: Student[] = STUDENTS;
 
