@@ -9,8 +9,8 @@ import { STUDENTS } from "../../mock-students";
 })
 export class StudentService {
 
-  public getStudents(): Student[] {
-    return STUDENTS;
+  public getStudents(): Observable<Student[]> {
+    return of(STUDENTS);
   }
 
   public addStudent(student: Student): Student[] {

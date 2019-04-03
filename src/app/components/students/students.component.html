@@ -1,12 +1,12 @@
 <div class="table__wrapper">
   <table class="table table--blue" *ngIf="!formVis">
     <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Last Name</th>
-        <th>Address</th>
-        <th>Description</th>
+      <tr (click)="onClick($event)">
+        <th id="id">Id</th>
+        <th id="name">Name</th>
+        <th id="lastName">Last Name</th>
+        <th id="address">Address</th>
+        <th id="description">Description</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +30,9 @@
     </tbody>
   </table>
   <app-form [info]="formInfo" *ngIf="formVis"></app-form>
-  <app-button (click)="formVis ? formVis = false : formVis = true"></app-button>
+  <app-button 
+    (click)="formVis ? formVis = false : formVis = true"
+    [type]="button"
+  ></app-button>
 </div>
 
