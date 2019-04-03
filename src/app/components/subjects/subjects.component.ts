@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Subject } from "src/app/common/entities";
+import { Subject, Button } from "src/app/common/entities";
 import { SUBJECTS } from "src/app/mock-subjects";
 
 import { SubjectService } from "../../common/services/subjects.service";
@@ -10,6 +10,11 @@ import { SubjectService } from "../../common/services/subjects.service";
   styleUrls: ["./subjects.component.scss"]
 })
 export class SubjectsComponent implements OnInit {
+
+  button: Button = {
+    text: '+',
+    class: 'btn--add'
+  }
 
   private formInfo: object = {
     title: "Add new Subject",
@@ -30,7 +35,8 @@ export class SubjectsComponent implements OnInit {
   }
 
   public getSubjects(): void {
-    this.subjects = this.subjectService.getSubjects();
+    this.subjectService.getSubjects()
+      .subscribe(subjects => this.subjects = subjects);
   }
 
   public addSubject(subject: Subject): void {
