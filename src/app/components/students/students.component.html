@@ -1,5 +1,5 @@
 <div class="table__wrapper">
-  <table class="table table--blue">
+  <table class="table table--blue" *ngIf="!formVis">
     <thead>
       <tr>
         <th>Id</th>
@@ -29,6 +29,7 @@
       </tr>
     </tbody>
   </table>
-  <app-button></app-button>
+  <app-form [info]="formInfo" *ngIf="formVis"></app-form>
+  <app-button (click)="formVis ? formVis = false : formVis = true"></app-button>
 </div>
 
