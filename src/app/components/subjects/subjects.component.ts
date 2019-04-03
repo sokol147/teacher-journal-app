@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Subject } from "src/common/entities";
 import { SUBJECTS } from "src/app/mock-subjects";
 
-import { SubjectService } from '../../../common/services/subjects.service';
+import { SubjectService } from "../../../common/services/subjects.service";
 
 @Component({
   selector: "app-subjects",
@@ -11,17 +11,30 @@ import { SubjectService } from '../../../common/services/subjects.service';
 })
 export class SubjectsComponent implements OnInit {
 
-  subjects: Subject[];
+  private formInfo: object = {
+    title: "Add new Subject",
+    type: "subject",
+    fields: [
+      { label: "Name", isRequired: true, id: "name" },
+      { label: "Teacher", isRequired: true, id: "teacher" },
+      { label: "Cabinet", isRequired: false, id: "cabinet" }
+    ]
+  };
+
+  public subjects: Subject[];
 
   constructor( private subjectService: SubjectService) { }
 
-  public ngOnInit() {
-    this.getSubjects()
+  public ngOnInit(): void {
+    this.getSubjects();
   }
 
-  getSubjects(): void{
-    this.subjectService.getSubjects()
-      .subscribe(subjects => this.subjects = subjects)
+  public getSubjects(): void {
+    this.subjects = this.subjectService.getSubjects();
+  }
+
+  public addSubject(subject: Subject): void {
+    this.subjects = this.subjectService.addSubject(subject);
   }
 
   // @Input() subjects: Subject[];
