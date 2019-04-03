@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { Student } from "../../common/entities/index";
-import { Subject } from "../../common/entities/index";
+import { Student } from "../common/entities/index";
+import { Subject } from "../common/entities/index";
 import { STUDENTS } from "../mock-students";
 import { SUBJECTS } from "../mock-subjects";
 

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { Student } from "../../../common/entities";
+import { Student } from "../../common/entities";
 
-import { StudentService } from "../../../common/services/students.service";
+import { StudentService } from "../../common/services/students.service";
 
 @Component({
   selector: "app-students",

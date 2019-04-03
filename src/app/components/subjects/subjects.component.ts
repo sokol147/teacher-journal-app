@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Subject } from "src/common/entities";
+import { Subject } from "src/app/common/entities";
 import { SUBJECTS } from "src/app/mock-subjects";
 
-import { SubjectService } from "../../../common/services/subjects.service";
+import { SubjectService } from "../../common/services/subjects.service";
 
 @Component({
   selector: "app-subjects",
