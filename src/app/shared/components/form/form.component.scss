@@ -1,0 +1,59 @@
+@import '../../../../variables.scss';
+
+.form{
+  &__wrapper{
+    padding: 2rem 0;
+    width: 450px;
+    margin: 0 auto;
+  }
+  &--add{
+    border: 3px solid $white;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  &__field{
+    margin-bottom: 1rem;
+  }
+  &__label{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    &.required{
+      position: relative;
+      &::before{
+        content: '*'
+      }
+    }
+  }
+  &__input{
+    margin-left: auto;
+    width: 240px;
+    min-width: 180px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+  }
+  &__btn{
+    margin: 0 auto;
+    display: block;
+    padding: 0.5rem 1rem;
+    background: $lightGrey;
+    border: none;
+    border-radius: 5px;
+    color: $orange;
+    font-weight: bold;
+    font-size: 150%;
+    cursor: pointer;
+    transition: .3s;
+    &:hover{
+      background: darken($lightGrey, 10%);
+    }
+    &[disabled]{
+      background: darken($lightGrey, 80%);
+      cursor: not-allowed;
+    }
+  }
+}
