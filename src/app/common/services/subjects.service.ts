@@ -9,13 +9,17 @@ import { SUBJECTS } from "src/app/mock-subjects";
 })
 export class SubjectService {
 
-  public getSubjects(): Subject[] {
-    return SUBJECTS;
+  public getSubjects(): Observable<Subject[]> {
+    return of(SUBJECTS);
   }
 
   public addSubject(subject: Subject): Subject[] {
     subject.id = SUBJECTS.length + 1;
     SUBJECTS.push(subject);
     return SUBJECTS;
+  }
+
+  public getSubject(name: string): Observable<Subject>{
+    return of(SUBJECTS.find(subject => subject.name === name))
   }
 }
