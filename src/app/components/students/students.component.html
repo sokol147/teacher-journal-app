@@ -1,16 +1,26 @@
 <div class="table__wrapper">
-  <!-- <table class="table table--blue" *ngIf="!formVis">
+  <table class="table table--blue" *ngIf="!formVis">
     <thead>
-      <tr (click)="onClick($event)">
-        <th id="id">Id</th>
-        <th id="name">Name</th>
-        <th id="lastName">Last Name</th>
-        <th id="address">Address</th>
-        <th id="description">Description</th>
+      <tr>
+        <th id="id">
+          <a href (click)="sortTable('id')">Id</a>
+        </th>
+        <th id="name">
+          <a href (click)="sortTable('name')">Name</a>
+        </th>
+        <th id="lastName">
+          <a href (click)="sortTable('lastName')">Last Name</a>
+        </th>
+        <th id="address">
+          <a href (click)="sortTable('address')">Address</a>
+        </th>
+        <th id="description">
+          <a href (click)="sortTable('description')">Description</a>
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students">
+      <tr *ngFor="let student of students | sortingStudents:path:order">
         <td>
           {{student.id}}
         </td>
@@ -28,8 +38,8 @@
         </td>
       </tr>
     </tbody>
-  </table> -->
-  <mat-table [dataSource]="dataSource" matSort class="table table--blue" *ngIf="!formVis">
+  </table>
+  <!-- <mat-table [dataSource]="dataSource" matSort class="table table--blue" *ngIf="!formVis">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
       <mat-cell *matCellDef="let student">{{student.id}}</mat-cell>
@@ -52,7 +62,7 @@
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns" class="table__header"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-  </mat-table>
+  </mat-table> -->
   <app-form [info]="formInfo" *ngIf="formVis"></app-form>
   <app-button 
     (click)="formVis ? formVis = false : formVis = true"

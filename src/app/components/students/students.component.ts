@@ -15,18 +15,20 @@ import * as _ from 'lodash';
 })
 export class StudentsComponent implements OnInit {
 
+  path: string[] = ['students'];
+  order: number = -1;
 
-  private sort: MatSort;
-  @ViewChild(MatSort) set matSort(ms: MatSort){
-    this.sort = ms;
-    this.setDataSourceAttributes();
-  }
-  dataSource;
-  displayedColumns = ['id', 'name', 'lastName', 'address', 'description'];
+  // private sort: MatSort;
+  // @ViewChild(MatSort) set matSort(ms: MatSort){
+  //   this.sort = ms;
+  //   this.setDataSourceAttributes();
+  // }
+  // dataSource;
+  // displayedColumns = ['id', 'name', 'lastName', 'address', 'description'];
 
-  setDataSourceAttributes() {
-    this.dataSource.sort = this.sort;
-  }
+  // setDataSourceAttributes() {
+  //   this.dataSource.sort = this.sort;
+  // }
 
   constructor( private studentService: StudentService) { }
 
@@ -47,10 +49,16 @@ export class StudentsComponent implements OnInit {
 
   public students: Student[];
 
+  sortTable(prop: string){
+    this.path = prop.split('.');
+    this.order = this.order * (-1);
+    return false;
+  }
+
   public ngOnInit(): void {
     this.getStudents();
-    this.dataSource = new MatTableDataSource(this.students);
-    this.dataSource.sort = this.sort;
+    // this.dataSource = new MatTableDataSource(this.students);
+    // this.dataSource.sort = this.sort;
   }
 
   public getStudents(): void {
