@@ -1,6 +1,12 @@
+@import '../../../assets/style/variables.scss';
+
 .table__wrapper{
   padding: 2rem 0;
   .table{
     margin-bottom: 2rem;
+    &__header{
+      background: $primary;
+    }
   }
 }
+

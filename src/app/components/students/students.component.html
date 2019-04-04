@@ -1,5 +1,5 @@
 <div class="table__wrapper">
-  <table class="table table--blue" *ngIf="!formVis">
+  <!-- <table class="table table--blue" *ngIf="!formVis">
     <thead>
       <tr (click)="onClick($event)">
         <th id="id">Id</th>
@@ -28,7 +28,31 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+  <mat-table [dataSource]="dataSource" matSort class="table table--blue" *ngIf="!formVis">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{student.id}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{student.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{student.lastName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{student.address}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{student.description}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="table__header"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
   <app-form [info]="formInfo" *ngIf="formVis"></app-form>
   <app-button 
     (click)="formVis ? formVis = false : formVis = true"

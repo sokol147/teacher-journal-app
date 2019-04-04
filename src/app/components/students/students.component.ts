@@ -1,8 +1,10 @@
-import { Component, OnInit, Input} from "@angular/core";
+import { Component, OnInit, Input, ViewChild} from "@angular/core";
 
 import { Student, Button } from "../../common/entities";
 
 import { StudentService } from "../../common/services/students.service";
+
+import { MatSort, MatSortable, MatTableDataSource } from "@angular/material";
 
 import * as _ from 'lodash';
 
@@ -12,6 +14,21 @@ import * as _ from 'lodash';
   styleUrls: ["./students.component.scss"]
 })
 export class StudentsComponent implements OnInit {
+
+
+  private sort: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort){
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+  dataSource;
+  displayedColumns = ['id', 'name', 'lastName', 'address', 'description'];
+
+  setDataSourceAttributes() {
+    this.dataSource.sort = this.sort;
+  }
+
+  constructor( private studentService: StudentService) { }
 
   private button: Button = {
     text: '+',
@@ -30,10 +47,10 @@ export class StudentsComponent implements OnInit {
 
   public students: Student[];
 
-  constructor( private studentService: StudentService) { }
-
   public ngOnInit(): void {
     this.getStudents();
+    this.dataSource = new MatTableDataSource(this.students);
+    this.dataSource.sort = this.sort;
   }
 
   public getStudents(): void {
@@ -44,12 +61,4 @@ export class StudentsComponent implements OnInit {
   public addStudent(student: Student): void {
     this.students = this.studentService.addStudent(student);
   }
-
-  // public onClick($event){
-  //   $event.target.tagName === 'TH' ?
-  //     _.sortBy(this.students, $event.target.id) :
-  //     console.log('no')
-  // }
-
-  // @Input() students: Student[];
 }
