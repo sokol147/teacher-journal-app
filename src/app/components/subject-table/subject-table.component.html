@@ -5,15 +5,30 @@
     <table class="table table--blue">
       <thead>
         <tr>
-          <th *ngFor="let th of thead">
-            <input type="text" value="{{th}}" class="table__input">
+          <th>Name</th>
+          <th>Last Name</th>
+          <th>Average Mark</th>
+          <th *ngFor="let day of subject.date">
+            <input 
+              type="text"
+              value="{{day}}"
+              [(ngModel)]="day"
+              class="table__input">
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let student of studentsList">
-          <td *ngFor="let data of student">
-            <input type="text" [(ngModel)]="data" class="table__input">
+        <tr *ngFor="let student of subject.students">
+          <td>{{student.name}}</td>
+          <td>{{student.lastName}}</td>
+          <td>{{student.averageMark | defaultMark}}</td>
+          <td *ngFor="let mark of student.marks">
+              <input 
+                type="text" 
+                value="{{mark.mark}}"
+                [(ngModel)]="mark.mark"
+                class="table__input"
+                (blur)="calcAverage()">
           </td>
         </tr>
       </tbody>
