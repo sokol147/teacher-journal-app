@@ -19,7 +19,7 @@ export class SubjectService {
     return of(SUBJECTS);
   }
 
-  public getSubject(name: string): Observable<Subject>{
-    return of(SUBJECTS.find(subject => subject.name === name))
+  public getSubject(name: string): Observable<Subject> {
+    return of(SUBJECTS.find(subject => subject.name === name));
   }
 }

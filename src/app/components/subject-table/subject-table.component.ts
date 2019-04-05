@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ActivatedRoute } from "@angular/router";
-import { Subject, Button } from 'src/app/common/entities';
+import { Subject, Button } from "src/app/common/entities";
 
-import { StudentService } from '../../common/services/students.service'
-import { DbService } from '../../common/services/db.service';
+import { StudentService } from "../../common/services/students.service";
+import { DbService } from "../../common/services/db.service";
 
 @Component({
   selector: "app-subject-table",
@@ -13,52 +13,51 @@ import { DbService } from '../../common/services/db.service';
 })
 export class SubjectTableComponent implements OnInit {
 
-  button: Button = {
-    text: 'save',
-    class: 'btn--save'
-  }
+  public button: Button = {
+    text: "save",
+    class: "btn--save"
+  };
 
-  subject: Subject;
+  public subject: Subject;
 
   constructor(
     private route: ActivatedRoute,
-    private DbService: DbService
-  ){}
+    private dbService: DbService
+  ) {}
 
   public ngOnInit(): void {
     this.getSubject();
   }
 
-
-  getSubject():void {
-    const name = this.route.snapshot.paramMap.get('name');
-    this.DbService.getSubject(name)
+  public getSubject(): void {
+    const name: string = this.route.snapshot.paramMap.get("name");
+    this.dbService.getSubject(name)
       .subscribe(subject => this.subject = subject);
   }
 
-  addDay(): void {
-    this.subject.date.push('Enter date');
+  public addDay(): void {
+    this.subject.date.push("Enter date");
     this.subject.students.forEach(student => {
       student.marks.push({
-        day: '',
-        mark: ''
+        day: "",
+        mark: ""
       });
-    })
+    });
     // console.log(this.subject)
   }
 
-  calcAverage(): void {
+  public calcAverage(): void {
     this.subject.students.forEach(student => {
-      let marksSum = 0;
-      let markCounter = 0;
+      let marksSum: number = 0;
+      let markCounter: number = 0;
       student.marks.forEach(mark => {
-        if(+mark.mark !== 0){
+        if (+mark.mark !== 0) {
           marksSum += +mark.mark;
           markCounter++;
         }
-      })
-      let result = (marksSum / markCounter).toFixed(1);
+      });
+      let result: string = (marksSum / markCounter).toFixed(1);
       student.averageMark = result;
-    })
+    });
   }
 }

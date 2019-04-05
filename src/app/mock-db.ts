@@ -1,62 +1,64 @@
-export const DATABASE = {
+import { DB}  from "./common/entities";
+
+export const DATABASE: DB = {
   students: [
     {
       id: 1,
-      name: 'Max',
-      lastName: 'Pain',
-      address: 'st. Mir 25',
-      description: 'Feel the pain'
-    },{
+      name: "Max",
+      lastName: "Pain",
+      address: "st. Mir 25",
+      description: "Feel the pain"
+    }, {
       id: 2,
-      name: 'Luck',
-      lastName: 'Osm',
-      address: 'st. Stir 48',
-      description: 'Have a power'
-    },{
+      name: "Luck",
+      lastName: "Osm",
+      address: "st. Stir 48",
+      description: "Have a power"
+    }, {
       id: 3,
-      name: 'Julia',
-      lastName: 'Fix',
-      address: 'st. Doom 13',
-      description: 'Know some magic'
+      name: "Julia",
+      lastName: "Fix",
+      address: "st. Doom 13",
+      description: "Know some magic"
     }
   ],
   subjects: [
     {
       id: 1,
-      name: 'Biology',
-      teacher: 'Ms. Poison',
+      name: "Biology",
+      teacher: "Ms. Poison",
       cabinet: 10,
-      description: 'Know evolution theory',
-      date: [ '06/01' ],
+      description: "Know evolution theory",
+      date: [ "06/01" ],
       students: [
         {
-          name: 'Max',
-          lastName: 'Pain',
+          name: "Max",
+          lastName: "Pain",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
-        },{
-          name: 'Luck',
-          lastName: 'Osm',
+        }, {
+          name: "Luck",
+          lastName: "Osm",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
-        },{
-          name: 'Julia',
-          lastName: 'Fix',
+        }, {
+          name: "Julia",
+          lastName: "Fix",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
         }
@@ -64,40 +66,40 @@ export const DATABASE = {
     },
     {
       id: 2,
-      name: 'Maths',
-      teacher: 'Mr. Plus',
+      name: "Maths",
+      teacher: "Mr. Plus",
       cabinet: 14,
-      description: '',
-      date: [ '06/01' ],
+      description: "",
+      date: [ "06/01" ],
       students: [
         {
-          name: 'Max',
-          lastName: 'Pain',
+          name: "Max",
+          lastName: "Pain",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
-        },{
-          name: 'Luck',
-          lastName: 'Osm',
+        }, {
+          name: "Luck",
+          lastName: "Osm",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
-        },{
-          name: 'Julia',
-          lastName: 'Fix',
+        }, {
+          name: "Julia",
+          lastName: "Fix",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
         }
@@ -105,44 +107,44 @@ export const DATABASE = {
     },
     {
       id: 3,
-      name: 'History',
-      teacher: 'Mr. Napoleon',
+      name: "History",
+      teacher: "Mr. Napoleon",
       cabinet: 10,
-      description: 'Hate russian winter',
-      date: [ '06/01' ],
+      description: "Hate russian winter",
+      date: [ "06/01" ],
       students: [
         {
-          name: 'Max',
-          lastName: 'Pain',
+          name: "Max",
+          lastName: "Pain",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
-        },{
-          name: 'Luck',
-          lastName: 'Osm',
+        }, {
+          name: "Luck",
+          lastName: "Osm",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
-        },{
-          name: 'Julia',
-          lastName: 'Fix',
+        }, {
+          name: "Julia",
+          lastName: "Fix",
           averageMark: 0,
           marks: [
             {
-              day: '06/01',
-              mark: ''
+              day: "06/01",
+              mark: ""
             }
           ]
         }
       ]
     },
   ]
-}
+};

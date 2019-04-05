@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ButtonComponent } from "../shared/components/button/button.component";
 import { FormComponent } from "../shared/components/form/form.component";
 
-let sharedComponents = [ButtonComponent, FormComponent]
+let sharedComponents: any[] = [ButtonComponent, FormComponent];
 
 @NgModule({
   imports: [ CommonModule, ReactiveFormsModule ],

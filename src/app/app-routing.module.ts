@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { StudentsComponent } from "./components/students/students.component";
 import { SubjectsComponent } from "./components/subjects/subjects.component";
-import { SubjectTableComponent } from './components/subject-table/subject-table.component';
+import { SubjectTableComponent } from "./components/subject-table/subject-table.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/students", pathMatch: "full"},

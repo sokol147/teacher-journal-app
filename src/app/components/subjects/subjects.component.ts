@@ -10,11 +10,6 @@ import { DbService } from "../../common/services/db.service";
 })
 export class SubjectsComponent implements OnInit {
 
-  button: Button = {
-    text: '+',
-    class: 'btn--add'
-  }
-
   private formInfo: object = {
     title: "Add new Subject",
     type: "subject",
@@ -25,11 +20,16 @@ export class SubjectsComponent implements OnInit {
     ]
   };
 
+  public button: Button = {
+    text: "+",
+    class: "btn--add"
+  };
+
   public subjects: Subject[];
   public studentsList: Student[];
 
-  constructor( 
-    private DbService: DbService
+  constructor(
+    private dbService: DbService
   ) { }
 
   public ngOnInit(): void {
@@ -38,17 +38,17 @@ export class SubjectsComponent implements OnInit {
   }
 
   public getSubjects(): void {
-    this.DbService.getSubjects()
+    this.dbService.getSubjects()
       .subscribe(subjects => this.subjects = subjects);
   }
 
   public getStudents(): void {
-    this.DbService.getStudents()
+    this.dbService.getStudents()
       .subscribe(students => this.studentsList = students);
   }
 
   public addSubject(subject: Subject): void {
-    this.DbService.addSubject(subject)
+    this.dbService.addSubject(subject)
       .subscribe(subjects => this.subjects = subjects);
   }
 }

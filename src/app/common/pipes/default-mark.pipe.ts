@@ -1,12 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'defaultMark'
+  name: "defaultMark"
 })
 export class DefaultMarkPipe implements PipeTransform {
 
-  transform(value: number, args?: any): any {
-    return (isNaN(value)) ? '-' : value
+  public transform(value: number, args?: any): any {
+    return (isNaN(value)) ? "-" : value;
   }
 
 }

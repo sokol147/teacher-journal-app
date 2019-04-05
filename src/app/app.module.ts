@@ -11,11 +11,11 @@ import { StudentsComponent } from "./components/students/students.component";
 import { SubjectsComponent } from "./components/subjects/subjects.component";
 import { SubjectTableComponent } from "./components/subject-table/subject-table.component";
 
-import { SortingStudentsPipe } from './common/pipes/sorting-students.pipe';
-import { PartyTimePipe } from './common/pipes/party-tyme.pipe';
+import { SortingStudentsPipe } from "./common/pipes/sorting-students.pipe";
+import { PartyTimePipe } from "./common/pipes/party-tyme.pipe";
 
 import { SharedModule } from "./shared/shared.module";
-import { DefaultMarkPipe } from './common/pipes/default-mark.pipe';
+import { DefaultMarkPipe } from "./common/pipes/default-mark.pipe";
 
 @NgModule({
   declarations: [

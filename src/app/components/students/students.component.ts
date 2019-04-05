@@ -11,17 +11,10 @@ import { DbService } from "../../common/services/db.service";
 })
 export class StudentsComponent implements OnInit {
 
-  path: string[] = ['students'];
-  order: number = -1;
-
-  constructor( 
-    private DbService: DbService
-  ) { }
-
   private button: Button = {
-    text: '+',
-    class: 'btn--add'
-  }
+    text: "+",
+    class: "btn--add"
+  };
 
   private formInfo: any = {
     title: "Add new Student",
@@ -33,10 +26,17 @@ export class StudentsComponent implements OnInit {
     ]
   };
 
+  public path: string[] = ["students"];
+  public order: number = -1;
+
   public students: Student[];
 
-  sortTable(prop: string){
-    this.path = prop.split('.');
+  constructor(
+    private dbService: DbService
+  ) { }
+
+  public sortTable(prop: string): boolean {
+    this.path = prop.split(".");
     this.order = this.order * (-1);
     return false;
   }
@@ -46,12 +46,12 @@ export class StudentsComponent implements OnInit {
   }
 
   public getStudents(): void {
-    this.DbService.getStudents()
+    this.dbService.getStudents()
       .subscribe(students => this.students = students);
   }
 
   public addStudent(student: Student): void {
-    this.DbService.addStudent(student)
+    this.dbService.addStudent(student)
       .subscribe(students => this.students = students);
   }
 }
