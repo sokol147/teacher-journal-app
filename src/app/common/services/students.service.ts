@@ -13,10 +13,10 @@ export class StudentService {
     return of(STUDENTS);
   }
 
-  public addStudent(student: Student): Student[] {
+  public addStudent(student: Student): Observable<Student[]> {
     student.id = STUDENTS.length + 1;
     STUDENTS.push(student);
-    return STUDENTS;
+    return of(STUDENTS);
   }
 
 }
