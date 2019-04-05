@@ -1,12 +1,8 @@
-import { Component, OnInit, Input, ViewChild} from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 import { Student, Button } from "../../common/entities";
 
-import { StudentService } from "../../common/services/students.service";
-
-import { MatSort, MatSortable, MatTableDataSource } from "@angular/material";
-
-import * as _ from 'lodash';
+import { DbService } from "../../common/services/db.service";
 
 @Component({
   selector: "app-students",
@@ -18,19 +14,9 @@ export class StudentsComponent implements OnInit {
   path: string[] = ['students'];
   order: number = -1;
 
-  // private sort: MatSort;
-  // @ViewChild(MatSort) set matSort(ms: MatSort){
-  //   this.sort = ms;
-  //   this.setDataSourceAttributes();
-  // }
-  // dataSource;
-  // displayedColumns = ['id', 'name', 'lastName', 'address', 'description'];
-
-  // setDataSourceAttributes() {
-  //   this.dataSource.sort = this.sort;
-  // }
-
-  constructor( private studentService: StudentService) { }
+  constructor( 
+    private DbService: DbService
+  ) { }
 
   private button: Button = {
     text: '+',
@@ -57,16 +43,15 @@ export class StudentsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getStudents();
-    // this.dataSource = new MatTableDataSource(this.students);
-    // this.dataSource.sort = this.sort;
   }
 
   public getStudents(): void {
-    this.studentService.getStudents()
+    this.DbService.getStudents()
       .subscribe(students => this.students = students);
   }
 
   public addStudent(student: Student): void {
-    this.students = this.studentService.addStudent(student);
+    this.DbService.addStudent(student)
+      .subscribe(students => this.students = students);
   }
 }

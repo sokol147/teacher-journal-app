@@ -7,6 +7,10 @@
     &__header{
       background: $primary;
     }
+    &__link{
+      color: $white;
+      text-decoration: none;
+    }
   }
 }
 
