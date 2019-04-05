@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Subject, Button } from "src/app/common/entities";
-import { SUBJECTS } from "src/app/mock-subjects";
+import { Subject, Button, Student } from "src/app/common/entities";
 
-import { SubjectService } from "../../common/services/subjects.service";
+import { DbService } from "../../common/services/db.service";
 
 @Component({
   selector: "app-subjects",
@@ -27,21 +26,29 @@ export class SubjectsComponent implements OnInit {
   };
 
   public subjects: Subject[];
+  public studentsList: Student[];
 
-  constructor( private subjectService: SubjectService) { }
+  constructor( 
+    private DbService: DbService
+  ) { }
 
   public ngOnInit(): void {
     this.getSubjects();
+    this.getStudents();
   }
 
   public getSubjects(): void {
-    this.subjectService.getSubjects()
+    this.DbService.getSubjects()
       .subscribe(subjects => this.subjects = subjects);
   }
 
-  public addSubject(subject: Subject): void {
-    this.subjects = this.subjectService.addSubject(subject);
+  public getStudents(): void {
+    this.DbService.getStudents()
+      .subscribe(students => this.studentsList = students);
   }
 
-  // @Input() subjects: Subject[];
+  public addSubject(subject: Subject): void {
+    this.DbService.addSubject(subject)
+      .subscribe(subjects => this.subjects = subjects);
+  }
 }
