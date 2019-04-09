@@ -1,4 +1,5 @@
 <div class="subject__inner" *ngIf="subject">
+  <div>{{currentSubject | async}}</div>
   <div class="table__wrapper">
     <h3>{{subject.name}}</h3>
     <button class="subject__btn" (click)="addDay()">+</button>
@@ -9,11 +10,12 @@
           <th>Last Name</th>
           <th>Average Mark</th>
           <th *ngFor="let day of subject.date">
-            <input 
+            <input
               type="text"
               value="{{day}}"
               [(ngModel)]="day"
-              class="table__input">
+              class="table__input"
+              placeholder="Enter date">
           </th>
         </tr>
       </thead>
@@ -23,12 +25,13 @@
           <td>{{student.lastName}}</td>
           <td>{{student.averageMark | defaultMark}}</td>
           <td *ngFor="let mark of student.marks">
-              <input 
-                type="text" 
-                value="{{mark.mark}}"
-                [(ngModel)]="mark.mark"
-                class="table__input"
-                (blur)="calcAverage()">
+            <input 
+              type="text" 
+              value="{{mark.mark}}"
+              [(ngModel)]="mark.mark"
+              class="table__input"
+              (blur)="calcAverage()"
+              placeholder="Enter mark">
           </td>
         </tr>
       </tbody>
@@ -43,5 +46,5 @@
       >
     </label>
   </div>
-  <app-button [type]="button"></app-button>
+  <app-button [type]="button" (click)="saveSubject()"></app-button>
 </div>

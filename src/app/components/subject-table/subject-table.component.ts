@@ -3,8 +3,9 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Subject, Button } from "src/app/common/entities";
 
-import { StudentService } from "../../common/services/students.service";
 import { DbService } from "../../common/services/db.service";
+import { select } from '@angular-redux/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-subject-table",
@@ -13,6 +14,13 @@ import { DbService } from "../../common/services/db.service";
 })
 export class SubjectTableComponent implements OnInit {
 
+  constructor(
+    private route: ActivatedRoute,
+    private dbService: DbService,
+  ) {}
+
+  @select(['Subjects']) subjects$: Observable<any>
+
   public button: Button = {
     text: "save",
     class: "btn--save"
@@ -20,30 +28,29 @@ export class SubjectTableComponent implements OnInit {
 
   public subject: Subject;
 
-  constructor(
-    private route: ActivatedRoute,
-    private dbService: DbService
-  ) {}
-
   public ngOnInit(): void {
-    this.getSubject();
+    // this.getSubject();
+    const name: string = this.route.snapshot.paramMap.get("name");
+    this.subjects$.subscribe((subjects) => {
+      this.subject = subjects.find(subject => subject.name === name);
+    })
   }
 
-  public getSubject(): void {
-    const name: string = this.route.snapshot.paramMap.get("name");
-    this.dbService.getSubject(name)
-      .subscribe(subject => this.subject = subject);
-  }
+  // public getSubject(): void {
+  //   const name: string = this.route.snapshot.paramMap.get("name");
+  //   // this.dbService.getSubject(name)
+  //   //   .subscribe(subject => this.subject = subject);
+  // }
 
   public addDay(): void {
-    this.subject.date.push("Enter date");
+    this.subject.date.push("");
     this.subject.students.forEach(student => {
       student.marks.push({
         day: "",
         mark: ""
       });
     });
-    // console.log(this.subject)
+    console.log(this.subject)
   }
 
   public calcAverage(): void {
@@ -59,5 +66,9 @@ export class SubjectTableComponent implements OnInit {
       let result: string = (marksSum / markCounter).toFixed(1);
       student.averageMark = result;
     });
+  }
+
+  public saveSubject(): void {
+    
   }
 }
