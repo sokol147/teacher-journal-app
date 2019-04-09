@@ -1,10 +1,8 @@
-import { Component, OnInit, Input} from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 import { Student, Button } from "../../common/entities";
 
-import { StudentService } from "../../common/services/students.service";
-
-import * as _ from 'lodash';
+import { DbService } from "../../common/services/db.service";
 
 @Component({
   selector: "app-students",
@@ -14,9 +12,9 @@ import * as _ from 'lodash';
 export class StudentsComponent implements OnInit {
 
   private button: Button = {
-    text: '+',
-    class: 'btn--add'
-  }
+    text: "+",
+    class: "btn--add"
+  };
 
   private formInfo: any = {
     title: "Add new Student",
@@ -28,28 +26,32 @@ export class StudentsComponent implements OnInit {
     ]
   };
 
+  public path: string[] = ["students"];
+  public order: number = -1;
+
   public students: Student[];
 
-  constructor( private studentService: StudentService) { }
+  constructor(
+    private dbService: DbService
+  ) { }
+
+  public sortTable(prop: string): boolean {
+    this.path = prop.split(".");
+    this.order = this.order * (-1);
+    return false;
+  }
 
   public ngOnInit(): void {
     this.getStudents();
   }
 
   public getStudents(): void {
-    this.studentService.getStudents()
+    this.dbService.getStudents()
       .subscribe(students => this.students = students);
   }
 
   public addStudent(student: Student): void {
-    this.students = this.studentService.addStudent(student);
+    this.dbService.addStudent(student)
+      .subscribe(students => this.students = students);
   }
-
-  // public onClick($event){
-  //   $event.target.tagName === 'TH' ?
-  //     _.sortBy(this.students, $event.target.id) :
-  //     console.log('no')
-  // }
-
-  // @Input() students: Student[];
 }

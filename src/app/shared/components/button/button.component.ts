@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { Button } from '../../../common/entities';
+import { Button } from "../../../common/entities";
 
 @Component({
   selector: "app-button",
@@ -9,8 +9,8 @@ import { Button } from '../../../common/entities';
 })
 export class ButtonComponent implements OnInit {
 
-  public ngOnInit(): void { }
-
   @Input() public type: Button;
+
+  public ngOnInit(): void { }
 
 }

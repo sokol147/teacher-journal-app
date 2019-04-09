@@ -13,13 +13,13 @@ export class SubjectService {
     return of(SUBJECTS);
   }
 
-  public addSubject(subject: Subject): Subject[] {
+  public addSubject(subject: Subject): Observable<Subject[]> {
     subject.id = SUBJECTS.length + 1;
     SUBJECTS.push(subject);
-    return SUBJECTS;
+    return of(SUBJECTS);
   }
 
-  public getSubject(name: string): Observable<Subject>{
-    return of(SUBJECTS.find(subject => subject.name === name))
+  public getSubject(name: string): Observable<Subject> {
+    return of(SUBJECTS.find(subject => subject.name === name));
   }
 }

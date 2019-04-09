@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ActivatedRoute } from "@angular/router";
-import { Subject, Button } from 'src/app/common/entities';
+import { Subject, Button } from "src/app/common/entities";
 
-import { SubjectService } from '../../common/services/subjects.service'
-import { StudentService } from '../../common/services/students.service'
+import { StudentService } from "../../common/services/students.service";
+import { DbService } from "../../common/services/db.service";
 
 @Component({
   selector: "app-subject-table",
@@ -13,51 +13,51 @@ import { StudentService } from '../../common/services/students.service'
 })
 export class SubjectTableComponent implements OnInit {
 
-  button: Button = {
-    text: 'save',
-    class: 'btn--save'
-  }
+  public button: Button = {
+    text: "save",
+    class: "btn--save"
+  };
 
-  thead: string[] = ['Name', 'Last Name', 'Averege mark'];
-
-  subject: Subject;
-
-  studentsList:any[] = [];
+  public subject: Subject;
 
   constructor(
     private route: ActivatedRoute,
-    private subjectsService: SubjectService,
-    private studentsService: StudentService
-  ){}
+    private dbService: DbService
+  ) {}
 
   public ngOnInit(): void {
     this.getSubject();
-    this.getStudents();
   }
 
-  getStudents():void {
-    this.studentsService.getStudents()
-      .subscribe(students => {
-        students.forEach((student) => {
-          this.studentsList.push([
-            student.name,
-            student.lastName,
-            0
-          ])
-        })
-      })
-  }
-
-  getSubject():void {
-    const name = this.route.snapshot.paramMap.get('name');
-    this.subjectsService.getSubject(name)
+  public getSubject(): void {
+    const name: string = this.route.snapshot.paramMap.get("name");
+    this.dbService.getSubject(name)
       .subscribe(subject => this.subject = subject);
   }
 
-  addDay(): void{
-    this.thead.push('Enter Date');
-    this.studentsList.forEach(student => student.push(''))
-    console.log(this.studentsList)
+  public addDay(): void {
+    this.subject.date.push("Enter date");
+    this.subject.students.forEach(student => {
+      student.marks.push({
+        day: "",
+        mark: ""
+      });
+    });
+    // console.log(this.subject)
   }
 
+  public calcAverage(): void {
+    this.subject.students.forEach(student => {
+      let marksSum: number = 0;
+      let markCounter: number = 0;
+      student.marks.forEach(mark => {
+        if (+mark.mark !== 0) {
+          marksSum += +mark.mark;
+          markCounter++;
+        }
+      });
+      let result: string = (marksSum / markCounter).toFixed(1);
+      student.averageMark = result;
+    });
+  }
 }
