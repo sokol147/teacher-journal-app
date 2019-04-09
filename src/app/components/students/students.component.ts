@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { Student } from '../../../common/entities';
+import { Student } from "../../../common/entities";
 
-import { StudentService } from '../../../common/services/students.service';
+import { StudentService } from "../../../common/services/students.service";
 
 @Component({
   selector: "app-students",
@@ -11,7 +11,17 @@ import { StudentService } from '../../../common/services/students.service';
 })
 export class StudentsComponent implements OnInit {
 
-  students: Student[];
+  private formInfo: object = {
+    title: "Add new Student",
+    type: "student",
+    fields: [
+      { label: "Name", isRequired: true, id: "name" },
+      { label: "Last Name", isRequired: true, id: "lastName" },
+      { label: "Address", isRequired: false, id: "address" }
+    ]
+  };
+
+  public students: Student[];
 
   constructor( private studentService: StudentService) { }
 
@@ -19,9 +29,12 @@ export class StudentsComponent implements OnInit {
     this.getStudents();
   }
 
-  getStudents(): void{
-    this.studentService.getStudents()
-      .subscribe(students => this.students = students);
+  public getStudents(): void {
+    this.students = this.studentService.getStudents();
+  }
+
+  public addStudent(student: Student): void {
+    this.students = this.studentService.addStudent(student);
   }
 
   // @Input() students: Student[];

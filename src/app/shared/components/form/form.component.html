@@ -1,3 +1,26 @@
-<p>
-  form works!
-</p>
+<div class="form__wrapper">
+  <h3 class="form__title">{{info.title}}</h3>
+  <form
+    class="form--add"
+    [formGroup]="profileForm"
+    (ngSubmit)="onSubmit(info.type); myForm.reset()"
+    #myForm="ngForm">
+    <div class="form__field" *ngFor='let field of info.fields'>
+      <label class="form__label" [class.required]="field.isRequired">
+        {{field.label}}
+        <input 
+          class="form__input"
+          [required]="field.isRequired"
+          formControlName={{field.id}}
+          />
+      </label>
+    </div>
+    <div class="form__field">
+      <label class="form__label">
+        Descriptions
+        <textarea class="form__input" formControlName="description"></textarea>
+      </label>
+    </div>
+    <button class="form__btn" type="submit" [disabled]="!profileForm.valid">Add</button>
+  </form>
+</div>
