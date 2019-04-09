@@ -1,8 +1,4 @@
 import { Component } from "@angular/core";
-import { Student } from "../common/entities/index";
-import { Subject } from "../common/entities/index";
-import { STUDENTS } from "../mock-students";
-import { SUBJECTS } from "../mock-subjects";
 
 @Component({
   selector: "app-root",
@@ -12,7 +8,6 @@ import { SUBJECTS } from "../mock-subjects";
 export class AppComponent {
   public title: string = "Teacher Journal";
 
-  public students: Student[] = STUDENTS;
+  public ngOnInit(): void {}
 
-  public subjects: Subject[] = SUBJECTS;
 }
