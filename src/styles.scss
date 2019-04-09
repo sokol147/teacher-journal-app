@@ -10,7 +10,19 @@ html, body{
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: $bg-darkGrey;
-  color: $text-white;
+  color: $white;
 }
 
-
+.table{
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px solid $white;
+  border-radius: 5px;
+  &--blue{
+    thead th{
+      padding: 10px;
+      background: $primary;
+    }
+  }
+}

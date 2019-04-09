@@ -1,3 +1,8 @@
-<p>
-  subjects works!
-</p>
+<div class="subject__wrapper">
+  <ul class="subject__list">
+    <li class="subject__item" *ngFor="let subject of subjects">
+      {{subject.name}}
+    </li>
+  </ul>
+  <app-button></app-button>
+</div>
