@@ -20,7 +20,7 @@
       margin-right: 1rem;
     }
     &:hover{
-      color: orange;
+      color: $orange;
       background: darken($lightGrey, 10%);
     }
   }

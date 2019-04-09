@@ -1,9 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { Observable, of } from 'rxjs';
+
+import { Student } from "../entities";
+import { STUDENTS } from "../../app/mock-students";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-export class StudentsService {
+export class StudentService {
 
-  constructor() { }
+  getStudents(): Observable<Student[]> {
+    return of(STUDENTS);
+  }
 }
