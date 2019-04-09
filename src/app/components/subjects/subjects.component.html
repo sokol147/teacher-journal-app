@@ -1,7 +1,7 @@
 <div class="subject__wrapper">
   <h2>List of Subjects:</h2>
   <ul class="subject__list" *ngIf="!formVis">
-    <li class="subject__item" *ngFor="let subject of subjects">
+    <li class="subject__item" *ngFor="let subject of Subjects | async">
       <a routerLink="/subject/{{subject.name}}" class="subject__link">
         {{subject.name}}
       </a>
@@ -9,7 +9,7 @@
   </ul>
   <app-form [info]="formInfo" *ngIf="formVis"></app-form>
   <app-button 
-    (click)="formVis ? formVis = false : formVis = true"
+    (click)="formVis = !formVis"
     [type]="button"
   ></app-button>
 </div>
