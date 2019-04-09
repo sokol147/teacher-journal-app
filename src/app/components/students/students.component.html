@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students | sortingStudents:path:order">
+      <tr *ngFor="let student of Students | async | sortingStudents:path:order">
         <td>
           {{student.id}}
         </td>
@@ -41,7 +41,7 @@
   </table>
   <app-form [info]="formInfo" *ngIf="formVis"></app-form>
   <app-button 
-    (click)="formVis ? formVis = false : formVis = true"
+    (click)="formVis = !formVis"
     [type]="button"
   ></app-button>
 </div>

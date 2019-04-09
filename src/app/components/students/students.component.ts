@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Student, Button } from "../../common/entities";
-
 import { DbService } from "../../common/services/db.service";
+
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState } from '../../store'
+import { REMOVE_ALL_STUDENTS, ADD_STUDENT } from '../../actions';
 
 @Component({
   selector: "app-students",
@@ -10,6 +13,13 @@ import { DbService } from "../../common/services/db.service";
   styleUrls: ["./students.component.scss"]
 })
 export class StudentsComponent implements OnInit {
+
+  @select() Students;
+
+  constructor(
+    private dbService: DbService,
+    private ngRedux: NgRedux<IAppState>
+  ) { }
 
   private button: Button = {
     text: "+",
@@ -29,11 +39,23 @@ export class StudentsComponent implements OnInit {
   public path: string[] = ["students"];
   public order: number = -1;
 
-  public students: Student[];
+  // public students: Student[];
 
-  constructor(
-    private dbService: DbService
-  ) { }
+  public ngOnInit(): void {
+    // this.getStudents();
+  }
+
+  // public getStudents(): void {
+  //   this.dbService.getStudents()
+  //     .subscribe(students => this.students = students);
+  // }
+
+  public addStudent(student: Student): void {
+    this.ngRedux.dispatch({type: ADD_STUDENT, student: student});
+
+    // this.dbService.addStudent(student)
+    //   .subscribe(students => this.students = students);
+  }
 
   public sortTable(prop: string): boolean {
     this.path = prop.split(".");
@@ -41,17 +63,7 @@ export class StudentsComponent implements OnInit {
     return false;
   }
 
-  public ngOnInit(): void {
-    this.getStudents();
-  }
-
-  public getStudents(): void {
-    this.dbService.getStudents()
-      .subscribe(students => this.students = students);
-  }
-
-  public addStudent(student: Student): void {
-    this.dbService.addStudent(student)
-      .subscribe(students => this.students = students);
+  clearStudents(){
+    this.ngRedux.dispatch({type: REMOVE_ALL_STUDENTS});
   }
 }
