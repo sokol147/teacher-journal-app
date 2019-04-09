@@ -1,4 +1,4 @@
-import { Subject } from "../common/entities";
+import { Subject } from "./common/entities";
 
 export const SUBJECTS: Subject[] = [
   { id: 1, name: "Math", teacher: "Mr.Plus", cabinet: 5, description: "Know Math"},

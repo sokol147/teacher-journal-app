@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input} from "@angular/core";
 
-import { Student } from "../../../common/entities";
+import { Student, Button } from "../../common/entities";
 
-import { StudentService } from "../../../common/services/students.service";
+import { StudentService } from "../../common/services/students.service";
+
+import * as _ from 'lodash';
 
 @Component({
   selector: "app-students",
@@ -11,7 +13,12 @@ import { StudentService } from "../../../common/services/students.service";
 })
 export class StudentsComponent implements OnInit {
 
-  private formInfo: object = {
+  private button: Button = {
+    text: '+',
+    class: 'btn--add'
+  }
+
+  private formInfo: any = {
     title: "Add new Student",
     type: "student",
     fields: [
@@ -30,12 +37,19 @@ export class StudentsComponent implements OnInit {
   }
 
   public getStudents(): void {
-    this.students = this.studentService.getStudents();
+    this.studentService.getStudents()
+      .subscribe(students => this.students = students);
   }
 
   public addStudent(student: Student): void {
     this.students = this.studentService.addStudent(student);
   }
+
+  // public onClick($event){
+  //   $event.target.tagName === 'TH' ?
+  //     _.sortBy(this.students, $event.target.id) :
+  //     console.log('no')
+  // }
 
   // @Input() students: Student[];
 }

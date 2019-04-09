@@ -1,18 +1,25 @@
-@import '../../../../variables.scss';
+@import '../../../../assets/style/variables.scss';
 
 .btn{
-  width: 55px;
-  height: 55px;
   display: block;
   margin: 0 auto;
   border: none;
-  border-radius: 50%;
-  font-size: 45px;
-  line-height: 45px;
   font-weight: bold;
   cursor: pointer;
   transition: .3s;
   &:hover{
     color: $orange;
+  }
+  &--add{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-size: 45px;
+    line-height: 45px;
+  }
+  &--save{
+    padding: 0.5rem 1rem;
+    font-size: 20px;
+    border-radius: 5px;
   }
 }

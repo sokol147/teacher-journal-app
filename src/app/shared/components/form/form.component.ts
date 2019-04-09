@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 
-import { Student, Subject } from "../../../../common/entities";
+import { Student, Subject } from "../../../common/entities";
 
 import { StudentsComponent } from "../../../components/students/students.component";
 import { SubjectsComponent } from "../../../components/subjects/subjects.component";

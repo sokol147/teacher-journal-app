@@ -2,11 +2,14 @@
   <h2>List of Subjects:</h2>
   <ul class="subject__list" *ngIf="!formVis">
     <li class="subject__item" *ngFor="let subject of subjects">
-      <a routerLink="subject/{{subject.name}}">
+      <a routerLink="/subject/{{subject.name}}" class="subject__link">
         {{subject.name}}
       </a>
     </li>
   </ul>
   <app-form [info]="formInfo" *ngIf="formVis"></app-form>
-  <app-button (click)="formVis ? formVis = false : formVis = true"></app-button>
+  <app-button 
+    (click)="formVis ? formVis = false : formVis = true"
+    [type]="button"
+  ></app-button>
 </div>

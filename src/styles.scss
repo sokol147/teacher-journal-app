@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'variables.scss';
+@import '../src/assets/style/variables.scss';
 
 *, *::before, *::after{
   box-sizing: border-box;
@@ -11,6 +11,10 @@ html, body{
   font-family: Arial, Helvetica, sans-serif;
   background: $bg-darkGrey;
   color: $white;
+}
+
+main{
+  padding: 0 15px;
 }
 
 .table{
