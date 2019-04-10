@@ -20,4 +20,4 @@ export const STUDENTS: Student[] = [
     address: "st. Doom 13",
     description: "Know some magic"
   }
-]
+];

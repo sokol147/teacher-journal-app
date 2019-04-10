@@ -6,8 +6,7 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  public title: string = "Teacher Journal";
 
-  public ngOnInit(): void {}
+  public title: string = "Teacher Journal";
 
 }

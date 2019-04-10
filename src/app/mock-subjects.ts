@@ -12,7 +12,7 @@ export const SUBJECTS: Subject[] = [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -22,7 +22,7 @@ export const SUBJECTS: Subject[] = [
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -32,7 +32,7 @@ export const SUBJECTS: Subject[] = [
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -53,7 +53,7 @@ export const SUBJECTS: Subject[] = [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -63,7 +63,7 @@ export const SUBJECTS: Subject[] = [
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -73,7 +73,7 @@ export const SUBJECTS: Subject[] = [
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -94,7 +94,7 @@ export const SUBJECTS: Subject[] = [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -104,7 +104,7 @@ export const SUBJECTS: Subject[] = [
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -114,7 +114,7 @@ export const SUBJECTS: Subject[] = [
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: null,
+        averageMark: undefined,
         marks: [
           {
             day: "",
@@ -124,4 +124,4 @@ export const SUBJECTS: Subject[] = [
       }
     ]
   },
-]
+];
