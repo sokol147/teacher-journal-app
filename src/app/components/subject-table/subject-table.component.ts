@@ -1,11 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ActivatedRoute } from "@angular/router";
-import { Subject, Button } from "src/app/common/entities";
+import { Subject } from "src/app/common/entities";
+import { Button } from "../../shared/components/button/button.module";
 
 import { DbService } from "../../common/services/db.service";
-import { select } from '@angular-redux/store';
-import { Observable } from 'rxjs';
+import { select } from "@angular-redux/store";
+import { Observable } from "rxjs";
+import { ButtonType } from "../../shared/components/button/button.module";
 
 @Component({
   selector: "app-subject-table",
@@ -14,26 +16,29 @@ import { Observable } from 'rxjs';
 })
 export class SubjectTableComponent implements OnInit {
 
+  private button: Button = {
+    class: ButtonType.Save
+  };
+
+  private buttonPlus: Button = {
+    class: ButtonType.Plus
+  };
+
+  @select(["subjects"]) public subjects$: Observable<any>;
+
+  public subject: Subject;
+
   constructor(
     private route: ActivatedRoute,
     private dbService: DbService,
   ) {}
-
-  @select(['Subjects']) subjects$: Observable<any>
-
-  public button: Button = {
-    text: "save",
-    class: "btn--save"
-  };
-
-  public subject: Subject;
 
   public ngOnInit(): void {
     // this.getSubject();
     const name: string = this.route.snapshot.paramMap.get("name");
     this.subjects$.subscribe((subjects) => {
       this.subject = subjects.find(subject => subject.name === name);
-    })
+    });
   }
 
   // public getSubject(): void {
@@ -50,7 +55,7 @@ export class SubjectTableComponent implements OnInit {
         mark: ""
       });
     });
-    console.log(this.subject)
+    console.log(this.subject);
   }
 
   public calcAverage(): void {
@@ -66,9 +71,5 @@ export class SubjectTableComponent implements OnInit {
       let result: string = (marksSum / markCounter).toFixed(1);
       student.averageMark = result;
     });
-  }
-
-  public saveSubject(): void {
-    
   }
 }

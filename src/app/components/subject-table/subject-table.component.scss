@@ -5,22 +5,9 @@
     padding: 2rem 0;
   }
   &__btn{
-    height: 30px;
-    width: 30px;
     position: absolute;
     top: 26px;
     right: -13px;
-    background: $orange;
-    color: $white;
-    font-size: 30px;
-    line-height: 30px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: .3s;
-    &:hover{
-      background: darken($orange, 10%)
-    }
   }
   &__field{
     margin: 0 auto 2rem;
