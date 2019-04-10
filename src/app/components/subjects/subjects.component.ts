@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Subject, Button, Student } from "src/app/common/entities";
+import { Subject, Student } from "src/app/common/entities";
+import { Button } from "../../shared/components/button/button.module";
 
 import { DbService } from "../../common/services/db.service";
 
-import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from '../../store'
-import { ADD_SUBJECT } from '../../actions';
+import { NgRedux, select } from "@angular-redux/store";
+import { IAppState } from "../../store";
+import { ADD_SUBJECT } from "../../actions";
 
 @Component({
   selector: "app-subjects",
@@ -14,20 +15,15 @@ import { ADD_SUBJECT } from '../../actions';
 })
 export class SubjectsComponent implements OnInit {
 
-  @select() Subjects;
+  private formFields: any[] = [
+    { label: "Name", isRequired: true, id: "name" },
+    { label: "Teacher", isRequired: true, id: "teacher" },
+    { label: "Cabinet", isRequired: false, id: "cabinet" }
+  ];
 
-  private formInfo: object = {
-    title: "Add new Subject",
-    type: "subject",
-    fields: [
-      { label: "Name", isRequired: true, id: "name" },
-      { label: "Teacher", isRequired: true, id: "teacher" },
-      { label: "Cabinet", isRequired: false, id: "cabinet" }
-    ]
-  };
+  @select() public subjects: Subject[];
 
   public button: Button = {
-    text: "+",
     class: "btn--add"
   };
 
