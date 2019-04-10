@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of Students | async | sortingStudents:path:order">
+      <tr *ngFor="let student of students | async | sortingStudents:path:order">
         <td>
           {{student.id}}
         </td>
@@ -39,8 +39,10 @@
       </tr>
     </tbody>
   </table>
-  <app-form [info]="formInfo" *ngIf="formVis"></app-form>
-  <app-button 
+  <app-form [formFields]="formFields" *ngIf="formVis" (submitted)="addStudent($event)">
+    <h3 class="form__title">Add new Student</h3>
+  </app-form>
+  <app-button
     (click)="formVis = !formVis"
     [type]="button"
   ></app-button>

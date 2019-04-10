@@ -1,11 +1,14 @@
 import { Component, OnInit } from "@angular/core";
+import { NgRedux, select } from "@angular-redux/store";
 
-import { Student, Button } from "../../common/entities";
+import { Student } from "../../common/entities";
+
 import { DbService } from "../../common/services/db.service";
 
-import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from '../../store'
-import { REMOVE_ALL_STUDENTS, ADD_STUDENT } from '../../actions';
+import { IAppState } from "../../store";
+import { REMOVE_ALL_STUDENTS, ADD_STUDENT } from "../../actions";
+
+import { ButtonType, Button } from "../../shared/components/button/button.module";
 
 @Component({
   selector: "app-students",
@@ -14,30 +17,25 @@ import { REMOVE_ALL_STUDENTS, ADD_STUDENT } from '../../actions';
 })
 export class StudentsComponent implements OnInit {
 
-  @select() Students;
+  private button: Button = {
+    class: ButtonType.Add
+  };
+
+  private formFields: any[] = [
+    { label: "Name", isRequired: true, id: "name" },
+    { label: "Last Name", isRequired: true, id: "lastName" },
+    { label: "Address", isRequired: false, id: "address" }
+  ];
+
+  @select() public students: Student[];
+
+  public path: string[] = ["students"];
+  public order: number = -1;
 
   constructor(
     private dbService: DbService,
     private ngRedux: NgRedux<IAppState>
   ) { }
-
-  private button: Button = {
-    text: "+",
-    class: "btn--add"
-  };
-
-  private formInfo: any = {
-    title: "Add new Student",
-    type: "student",
-    fields: [
-      { label: "Name", isRequired: true, id: "name" },
-      { label: "Last Name", isRequired: true, id: "lastName" },
-      { label: "Address", isRequired: false, id: "address" }
-    ]
-  };
-
-  public path: string[] = ["students"];
-  public order: number = -1;
 
   // public students: Student[];
 
@@ -63,7 +61,7 @@ export class StudentsComponent implements OnInit {
     return false;
   }
 
-  clearStudents(){
+  public clearStudents(): void {
     this.ngRedux.dispatch({type: REMOVE_ALL_STUDENTS});
   }
 }
