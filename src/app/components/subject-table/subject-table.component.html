@@ -5,16 +5,16 @@
     <table class="table table--blue">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Last Name</th>
-          <th>Average Mark</th>
+          <th>{{ 'subjectsTable.name' | translate}}</th>
+          <th>{{ 'subjectsTable.lastName' | translate}}</th>
+          <th>{{ 'subjectsTable.averageMark' | translate}}</th>
           <th *ngFor="let day of subject.date">
             <input
               type="text"
               value="{{day}}"
               [(ngModel)]="day"
               class="table__input"
-              placeholder="Enter date">
+              placeholder="{{ 'subjectsTable.placeholderDate' | translate}}">
           </th>
         </tr>
       </thead>
@@ -30,14 +30,14 @@
               [(ngModel)]="mark.mark"
               class="table__input"
               (blur)="calcAverage()"
-              placeholder="Enter mark">
+              placeholder="{{ 'subjectsTable.placeholderMark' | translate}}">
           </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="subject__field">
-    <label class="subject__label">Teacher:
+    <label class="subject__label">{{ 'subjectsTable.teacherNameLabel' | translate }}
       <input 
         class="subject__input"
         [(ngModel)]="subject.teacher"

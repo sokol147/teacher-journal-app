@@ -1,0 +1,38 @@
+{
+  "title": "Журнал Учителя",
+  "nav": {
+    "students": "Студенты",
+    "subjects": "Предметы"
+  },
+  "studentsTable": {
+    "id": "Ид",
+    "name": "Имя",
+    "lastName": "Фамилия",
+    "address": "Адрес",
+    "description": "Описание"
+  },
+  "students": {
+    "formTitle": "Добавить студента"
+  },
+  "subjectsTable": {
+    "name": "Имя",
+    "lastName": "Фамилия",
+    "averageMark": "Средний бал",
+    "teacherNameLabel": "Учитель:",
+    "placeholderMark": "Введите оценку",
+    "placeholderDate": "Введите дату"
+  },
+  "subjects": {
+    "title": "Список предметов:",
+    "formTitle": "Добавить предмет"
+  },
+  "form": {
+    "buttonText": "Добавить",
+    "descriptionTextareaLabel": "Описание",
+    "inputLabelname": "Имя",
+    "inputLabellastName": "Фамилия",
+    "inputLabeladdress": "Адрес",
+    "inputLabelteacher": "Учитель",
+    "inputLabelcabinet": "Кабинет"
+  }
+}

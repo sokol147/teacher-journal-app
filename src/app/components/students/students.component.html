@@ -3,19 +3,19 @@
     <thead>
       <tr>
         <th id="id">
-          <a href (click)="sortTable('id')" class="table__link">Id</a>
+          <a href (click)="sortTable('id')" class="table__link">{{ 'studentsTable.id' | translate }}</a>
         </th>
         <th id="name">
-          <a href (click)="sortTable('name')" class="table__link">Name</a>
+          <a href (click)="sortTable('name')" class="table__link">{{ 'studentsTable.name' | translate }}</a>
         </th>
         <th id="lastName">
-          <a href (click)="sortTable('lastName')" class="table__link">Last Name</a>
+          <a href (click)="sortTable('lastName')" class="table__link">{{ 'studentsTable.lastName' | translate }}</a>
         </th>
         <th id="address">
-          <a href (click)="sortTable('address')" class="table__link">Address</a>
+          <a href (click)="sortTable('address')" class="table__link">{{ 'studentsTable.address' | translate }}</a>
         </th>
         <th id="description">
-          <a href (click)="sortTable('description')" class="table__link">Description</a>
+          <a href (click)="sortTable('description')" class="table__link">{{ 'studentsTable.description' | translate }}</a>
         </th>
       </tr>
     </thead>
@@ -40,7 +40,7 @@
     </tbody>
   </table>
   <app-form [formFields]="formFields" *ngIf="formVis" (submitted)="addStudent($event)">
-    <h3 class="form__title">Add new Student</h3>
+    <h3 class="form__title">{{ 'students.formTitle' | translate}}</h3>
   </app-form>
   <app-button
     (click)="formVis = !formVis"

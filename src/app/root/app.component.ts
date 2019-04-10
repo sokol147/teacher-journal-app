@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 
+import { TranslateService } from "@ngx-translate/core";
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -7,6 +9,14 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
 
+  constructor(private translate: TranslateService){
+    translate.setDefaultLang("en");
+  }
+
   public title: string = "Teacher Journal";
+
+  useLanguage(language: string) {
+    this.translate.use(language);
+  }
 
 }

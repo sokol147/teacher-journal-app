@@ -18,6 +18,11 @@ import { SharedModule } from "./shared/shared.module";
 
 import { NgRedux, NgReduxModule } from "@angular-redux/store";
 import { IAppState, rootReducer, INITIAL_STATE } from "./store";
+
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +40,14 @@ import { IAppState, rootReducer, INITIAL_STATE } from "./store";
     FormsModule,
     BrowserAnimationsModule,
     NgReduxModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -46,4 +59,8 @@ export class AppModule {
       INITIAL_STATE
     );
   }
+}
+
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http);
 }

@@ -7,7 +7,7 @@
     #myForm="ngForm">
     <div class="form__field" *ngFor='let field of formFields'>
       <label class="form__label" [class.required]="field.isRequired">
-        {{field.label}}
+        {{ ('form.inputLabel' + field.id ) | translate}}
         <input 
           class="form__input"
           [required]="field.isRequired"
@@ -17,13 +17,13 @@
     </div>
     <div class="form__field">
       <label class="form__label">
-        Descriptions
+        {{ 'form.descriptionTextareaLabel' | translate}}
         <textarea class="form__input" formControlName="description"></textarea>
       </label>
     </div>
     <button 
       class="form__btn" 
       type="submit" 
-      [disabled]="!profileForm.valid">Add</button>
+      [disabled]="!profileForm.valid">{{ 'form.buttonText' | translate }}</button>
   </form>
 </div>
