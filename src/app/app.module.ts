@@ -17,7 +17,7 @@ import { DefaultMarkPipe } from "./common/pipes/default-mark.pipe";
 import { SharedModule } from "./shared/shared.module";
 
 import { NgRedux, NgReduxModule } from "@angular-redux/store";
-import { IAppState, rootReducer, INITIAL_STATE } from './store';
+import { IAppState, rootReducer, INITIAL_STATE } from "./store";
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,10 +40,10 @@ import { IAppState, rootReducer, INITIAL_STATE } from './store';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>){
+  constructor(ngRedux: NgRedux<IAppState>) {
     ngRedux.configureStore(
       rootReducer,
       INITIAL_STATE
-    )
+    );
   }
 }

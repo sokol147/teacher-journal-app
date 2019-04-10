@@ -1,4 +1,3 @@
-export const ADD_STUDENT = "ADD_STUDENT";
-export const ADD_SUBJECT = "ADD_SUBJECT";
-export const REMOVE_ALL_STUDENTS = "REMOVE_ALL_STUDENTS";
-export const GET_SUBJECT = "GET_SUBJECT";
+export const ADD_STUDENT: string = "ADD_STUDENT";
+export const ADD_SUBJECT: string = "ADD_SUBJECT";
+export const REMOVE_ALL_STUDENTS: string = "REMOVE_ALL_STUDENTS";
