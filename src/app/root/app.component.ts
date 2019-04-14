@@ -1,8 +1,6 @@
 import { Component } from "@angular/core";
-import { Student } from "../common/entities/index";
-import { Subject } from "../common/entities/index";
-import { STUDENTS } from "../mock-students";
-import { SUBJECTS } from "../mock-subjects";
+
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-root",
@@ -10,9 +8,15 @@ import { SUBJECTS } from "../mock-subjects";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
+
+  constructor(private translate: TranslateService){
+    translate.setDefaultLang("en");
+  }
+
   public title: string = "Teacher Journal";
 
-  public students: Student[] = STUDENTS;
+  useLanguage(language: string) {
+    this.translate.use(language);
+  }
 
-  public subjects: Subject[] = SUBJECTS;
 }

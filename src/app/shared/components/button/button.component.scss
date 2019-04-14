@@ -7,8 +7,20 @@
   font-weight: bold;
   cursor: pointer;
   transition: .3s;
-  &:hover{
-    color: $orange;
+  &--plus{
+    height: 30px;
+    width: 30px;
+    background: $orange;
+    color: $white;
+    font-size: 30px;
+    line-height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .3s;
+    &:hover{
+      background: darken($orange, 10%)
+    }
   }
   &--add{
     width: 55px;
@@ -16,10 +28,16 @@
     border-radius: 50%;
     font-size: 45px;
     line-height: 45px;
+    &:hover{
+      color: $orange;
+    }
   }
   &--save{
     padding: 0.5rem 1rem;
     font-size: 20px;
     border-radius: 5px;
+    &:hover{
+      color: $orange;
+    }
   }
 }

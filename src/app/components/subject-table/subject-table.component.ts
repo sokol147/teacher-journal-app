@@ -1,10 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ActivatedRoute } from "@angular/router";
-import { Subject, Button } from "src/app/common/entities";
+import { Subject } from "src/app/common/entities";
+import { Button } from "../../shared/components/button/button.module";
 
-import { StudentService } from "../../common/services/students.service";
 import { DbService } from "../../common/services/db.service";
+import { select } from "@angular-redux/store";
+import { Observable } from "rxjs";
+import { ButtonType } from "../../shared/components/button/button.module";
 
 @Component({
   selector: "app-subject-table",
@@ -13,37 +16,46 @@ import { DbService } from "../../common/services/db.service";
 })
 export class SubjectTableComponent implements OnInit {
 
-  public button: Button = {
-    text: "save",
-    class: "btn--save"
+  private button: Button = {
+    class: ButtonType.Save
   };
+
+  private buttonPlus: Button = {
+    class: ButtonType.Plus
+  };
+
+  @select(["subjects"]) public subjects$: Observable<any>;
 
   public subject: Subject;
 
   constructor(
     private route: ActivatedRoute,
-    private dbService: DbService
+    private dbService: DbService,
   ) {}
 
   public ngOnInit(): void {
-    this.getSubject();
+    // this.getSubject();
+    const name: string = this.route.snapshot.paramMap.get("name");
+    this.subjects$.subscribe((subjects) => {
+      this.subject = subjects.find(subject => subject.name === name);
+    });
   }
 
-  public getSubject(): void {
-    const name: string = this.route.snapshot.paramMap.get("name");
-    this.dbService.getSubject(name)
-      .subscribe(subject => this.subject = subject);
-  }
+  // public getSubject(): void {
+  //   const name: string = this.route.snapshot.paramMap.get("name");
+  //   // this.dbService.getSubject(name)
+  //   //   .subscribe(subject => this.subject = subject);
+  // }
 
   public addDay(): void {
-    this.subject.date.push("Enter date");
+    this.subject.date.push("");
     this.subject.students.forEach(student => {
       student.marks.push({
         day: "",
         mark: ""
       });
     });
-    // console.log(this.subject)
+    console.log(this.subject);
   }
 
   public calcAverage(): void {

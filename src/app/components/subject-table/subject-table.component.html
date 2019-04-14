@@ -1,19 +1,20 @@
 <div class="subject__inner" *ngIf="subject">
   <div class="table__wrapper">
     <h3>{{subject.name}}</h3>
-    <button class="subject__btn" (click)="addDay()">+</button>
+    <app-button [type]="buttonPlus" class="subject__btn" (click)="addDay()"></app-button>
     <table class="table table--blue">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Last Name</th>
-          <th>Average Mark</th>
+          <th>{{ 'subjectsTable.name' | translate}}</th>
+          <th>{{ 'subjectsTable.lastName' | translate}}</th>
+          <th>{{ 'subjectsTable.averageMark' | translate}}</th>
           <th *ngFor="let day of subject.date">
-            <input 
+            <input
               type="text"
               value="{{day}}"
               [(ngModel)]="day"
-              class="table__input">
+              class="table__input"
+              placeholder="{{ 'subjectsTable.placeholderDate' | translate}}">
           </th>
         </tr>
       </thead>
@@ -23,19 +24,20 @@
           <td>{{student.lastName}}</td>
           <td>{{student.averageMark | defaultMark}}</td>
           <td *ngFor="let mark of student.marks">
-              <input 
-                type="text" 
-                value="{{mark.mark}}"
-                [(ngModel)]="mark.mark"
-                class="table__input"
-                (blur)="calcAverage()">
+            <input 
+              type="text" 
+              value="{{mark.mark}}"
+              [(ngModel)]="mark.mark"
+              class="table__input"
+              (blur)="calcAverage()"
+              placeholder="{{ 'subjectsTable.placeholderMark' | translate}}">
           </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="subject__field">
-    <label class="subject__label">Teacher:
+    <label class="subject__label">{{ 'subjectsTable.teacherNameLabel' | translate }}
       <input 
         class="subject__input"
         [(ngModel)]="subject.teacher"
@@ -43,5 +45,5 @@
       >
     </label>
   </div>
-  <app-button [type]="button"></app-button>
+  <app-button [type]="button" (click)="saveSubject()"></app-button>
 </div>

@@ -1,13 +1,13 @@
 <div class="form__wrapper">
-  <h3 class="form__title">{{info.title}}</h3>
+  <ng-content select=".form__title"></ng-content>
   <form
     class="form--add"
     [formGroup]="profileForm"
-    (ngSubmit)="onSubmit(info.type); myForm.reset()"
+    (ngSubmit)="onSubmit(profileForm.value); myForm.reset()"
     #myForm="ngForm">
-    <div class="form__field" *ngFor='let field of info.fields'>
+    <div class="form__field" *ngFor='let field of formFields'>
       <label class="form__label" [class.required]="field.isRequired">
-        {{field.label}}
+        {{ ('form.inputLabel' + field.id ) | translate}}
         <input 
           class="form__input"
           [required]="field.isRequired"
@@ -17,10 +17,13 @@
     </div>
     <div class="form__field">
       <label class="form__label">
-        Descriptions
+        {{ 'form.descriptionTextareaLabel' | translate}}
         <textarea class="form__input" formControlName="description"></textarea>
       </label>
     </div>
-    <button class="form__btn" type="submit" [disabled]="!profileForm.valid">Add</button>
+    <button 
+      class="form__btn" 
+      type="submit" 
+      [disabled]="!profileForm.valid">{{ 'form.buttonText' | translate }}</button>
   </form>
 </div>

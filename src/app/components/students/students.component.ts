@@ -1,8 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { NgRedux, select } from "@angular-redux/store";
 
-import { Student, Button } from "../../common/entities";
+import { Student } from "../../common/entities";
 
 import { DbService } from "../../common/services/db.service";
+
+import { IAppState } from "../../store";
+import { REMOVE_ALL_STUDENTS, ADD_STUDENT } from "../../actions";
+
+import { ButtonType, Button } from "../../shared/components/button/button.module";
 
 @Component({
   selector: "app-students",
@@ -12,28 +18,42 @@ import { DbService } from "../../common/services/db.service";
 export class StudentsComponent implements OnInit {
 
   private button: Button = {
-    text: "+",
-    class: "btn--add"
+    class: ButtonType.Add
   };
 
-  private formInfo: any = {
-    title: "Add new Student",
-    type: "student",
-    fields: [
-      { label: "Name", isRequired: true, id: "name" },
-      { label: "Last Name", isRequired: true, id: "lastName" },
-      { label: "Address", isRequired: false, id: "address" }
-    ]
-  };
+  private formFields: any[] = [
+    { label: "Name", isRequired: true, id: "name" },
+    { label: "Last Name", isRequired: true, id: "lastName" },
+    { label: "Address", isRequired: false, id: "address" }
+  ];
+
+  @select() public students: Student[];
 
   public path: string[] = ["students"];
   public order: number = -1;
 
-  public students: Student[];
-
   constructor(
-    private dbService: DbService
+    private dbService: DbService,
+    private ngRedux: NgRedux<IAppState>
   ) { }
+
+  // public students: Student[];
+
+  public ngOnInit(): void {
+    // this.getStudents();
+  }
+
+  // public getStudents(): void {
+  //   this.dbService.getStudents()
+  //     .subscribe(students => this.students = students);
+  // }
+
+  public addStudent(student: Student): void {
+    this.ngRedux.dispatch({type: ADD_STUDENT, student: student});
+
+    // this.dbService.addStudent(student)
+    //   .subscribe(students => this.students = students);
+  }
 
   public sortTable(prop: string): boolean {
     this.path = prop.split(".");
@@ -41,17 +61,7 @@ export class StudentsComponent implements OnInit {
     return false;
   }
 
-  public ngOnInit(): void {
-    this.getStudents();
-  }
-
-  public getStudents(): void {
-    this.dbService.getStudents()
-      .subscribe(students => this.students = students);
-  }
-
-  public addStudent(student: Student): void {
-    this.dbService.addStudent(student)
-      .subscribe(students => this.students = students);
+  public clearStudents(): void {
+    this.ngRedux.dispatch({type: REMOVE_ALL_STUDENTS});
   }
 }

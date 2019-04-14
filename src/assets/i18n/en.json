@@ -1,0 +1,42 @@
+{
+  "title": "Teacher Journal",
+  "nav": {
+    "students": "Students",
+    "subjects": "Subjects"
+  },
+  "studentsTable": {
+    "id": "Id",
+    "name": "Name",
+    "lastName": "Last Name",
+    "address": "Address",
+    "description": "Description"
+  },
+  "students": {
+    "formTitle": "Add new Student"
+  },
+  "subjectsTable": {
+    "name": "Name",
+    "lastName": "Last Name",
+    "averageMark": "Average Mark",
+    "teacherNameLabel": "Teacher:",
+    "placeholderMark": "Enter mark",
+    "placeholderDate": "Enter date"
+  },
+  "subjects": {
+    "title": "List of Subjects:",
+    "formTitle": "Add new Subject"
+  },
+  "form": {
+    "buttonText": "Add",
+    "descriptionTextareaLabel": "Descriptions",
+    "inputLabelname": "Name",
+    "inputLabellastName": "Last Name",
+    "inputLabeladdress": "Address",
+    "inputLabelteacher": "Teacher",
+    "inputLabelcabinet": "Cabinet"
+  },
+  "button": {
+    "buttonsave": "Save",
+    "button+": "+"
+  }
+}

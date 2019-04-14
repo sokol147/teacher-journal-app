@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 import { Button } from "../../../common/entities";
 
@@ -7,10 +7,28 @@ import { Button } from "../../../common/entities";
   templateUrl: "./button.component.html",
   styleUrls: ["./button.component.scss"]
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
 
   @Input() public type: Button;
 
-  public ngOnInit(): void { }
+  public text: string = "";
+
+  constructor() {}
+
+  public ngOnInit(): void {
+    switch (this.type.class) {
+      case "btn--add":
+        this.text = "+";
+        break;
+      case "btn--save":
+        this.text = "save";
+        break;
+      case "btn--plus":
+        this.text = "+";
+        break;
+      default:
+        this.text = "";
+    }
+  }
 
 }
