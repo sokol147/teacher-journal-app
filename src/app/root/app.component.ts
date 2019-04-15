@@ -9,13 +9,13 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AppComponent {
 
-  constructor(private translate: TranslateService){
+  public title: string = "Teacher Journal";
+
+  constructor(private translate: TranslateService) {
     translate.setDefaultLang("en");
   }
 
-  public title: string = "Teacher Journal";
-
-  useLanguage(language: string) {
+  public useLanguage(language: string) {
     this.translate.use(language);
   }
 

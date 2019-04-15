@@ -16,12 +16,17 @@ import { DefaultMarkPipe } from "./common/pipes/default-mark.pipe";
 
 import { SharedModule } from "./shared/shared.module";
 
-import { NgRedux, NgReduxModule } from "@angular-redux/store";
-import { IAppState, rootReducer, INITIAL_STATE } from "./store";
-
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+
+import { environment } from "src/environments/environment";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { StoreModule } from "@ngrx/store";
+
+import { reducer } from "./store/reducers/app.reducer";
 
 @NgModule({
   declarations: [
@@ -39,8 +44,13 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     SharedModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgReduxModule,
     HttpClientModule,
+
+    StoreModule.forRoot({ journal: reducer }),
+    
+    StoreRouterConnectingModule.forRoot({stateKey: "router"}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -52,15 +62,8 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(
-      rootReducer,
-      INITIAL_STATE
-    );
-  }
-}
+export class AppModule {}
 
-export function HttpLoaderFactory(http: HttpClient){
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
