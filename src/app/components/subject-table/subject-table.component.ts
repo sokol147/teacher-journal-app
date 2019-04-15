@@ -1,13 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-
 import { ActivatedRoute } from "@angular/router";
-import { Subject } from "src/app/common/entities";
-import { Button } from "../../shared/components/button/button.module";
 
-import { DbService } from "../../common/services/db.service";
-import { select } from "@angular-redux/store";
+import { Subject } from "src/app/common/entities";
+import { ButtonType, Button } from "../../shared/components/button/button.model";
+
 import { Observable } from "rxjs";
-import { ButtonType } from "../../shared/components/button/button.module";
+import { Store } from "@ngrx/store";
 
 @Component({
   selector: "app-subject-table",
@@ -16,6 +14,8 @@ import { ButtonType } from "../../shared/components/button/button.module";
 })
 export class SubjectTableComponent implements OnInit {
 
+  private subject: Subject;
+
   private button: Button = {
     class: ButtonType.Save
   };
@@ -23,37 +23,25 @@ export class SubjectTableComponent implements OnInit {
   private buttonPlus: Button = {
     class: ButtonType.Plus
   };
-
-  @select(["subjects"]) public subjects$: Observable<any>;
-
-  public subject: Subject;
+  public subject$: Observable<Subject>;
 
   constructor(
+    private _store: Store<any>,
     private route: ActivatedRoute,
-    private dbService: DbService,
-  ) {}
-
-  public ngOnInit(): void {
-    // this.getSubject();
+  ) {
     const name: string = this.route.snapshot.paramMap.get("name");
-    this.subjects$.subscribe((subjects) => {
-      this.subject = subjects.find(subject => subject.name === name);
+    this.subject$ = _store.select(state => {
+      this.subject = state.journal.subjects.find(subject => subject.name === name);
+      return state.journal.subjects.find(subject => subject.name === name);
     });
   }
 
-  // public getSubject(): void {
-  //   const name: string = this.route.snapshot.paramMap.get("name");
-  //   // this.dbService.getSubject(name)
-  //   //   .subscribe(subject => this.subject = subject);
-  // }
+  public ngOnInit(): void {}
 
   public addDay(): void {
     this.subject.date.push("");
     this.subject.students.forEach(student => {
-      student.marks.push({
-        day: "",
-        mark: ""
-      });
+      student.marks.push({ day: "", mark: "" });
     });
     console.log(this.subject);
   }
@@ -72,4 +60,6 @@ export class SubjectTableComponent implements OnInit {
       student.averageMark = result;
     });
   }
+
+  public saveSubject(): void {}
 }

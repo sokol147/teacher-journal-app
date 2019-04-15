@@ -1,14 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { NgRedux, select } from "@angular-redux/store";
-
 import { Student } from "../../common/entities";
+import { ButtonType, Button } from "../../shared/components/button/button.model";
 
-import { DbService } from "../../common/services/db.service";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
+import { IAppState } from "../../store/state/app.state";
 
-import { IAppState } from "../../store";
-import { REMOVE_ALL_STUDENTS, ADD_STUDENT } from "../../actions";
-
-import { ButtonType, Button } from "../../shared/components/button/button.module";
+import * as AppActions from "../../store/actions/app.actions";
 
 @Component({
   selector: "app-students",
@@ -27,32 +25,28 @@ export class StudentsComponent implements OnInit {
     { label: "Address", isRequired: false, id: "address" }
   ];
 
-  @select() public students: Student[];
+  public students$: Observable<Student[]>;
 
   public path: string[] = ["students"];
   public order: number = -1;
 
   constructor(
-    private dbService: DbService,
-    private ngRedux: NgRedux<IAppState>
-  ) { }
-
-  // public students: Student[];
-
-  public ngOnInit(): void {
-    // this.getStudents();
+    private _store: Store<any>
+  ) {
+    this.students$ = _store.select(state => state.journal.students);
   }
 
-  // public getStudents(): void {
-  //   this.dbService.getStudents()
-  //     .subscribe(students => this.students = students);
-  // }
+  public ngOnInit(): void {}
 
   public addStudent(student: Student): void {
-    this.ngRedux.dispatch({type: ADD_STUDENT, student: student});
-
-    // this.dbService.addStudent(student)
-    //   .subscribe(students => this.students = students);
+    let _student = {
+      id: student.id,
+      name: student.name,
+      lastName: student.lastName,
+      desctiption: student.description,
+      address: student.address,
+    }
+    this._store.dispatch(new AppActions.AddStudent(_student));
   }
 
   public sortTable(prop: string): boolean {
@@ -61,7 +55,5 @@ export class StudentsComponent implements OnInit {
     return false;
   }
 
-  public clearStudents(): void {
-    this.ngRedux.dispatch({type: REMOVE_ALL_STUDENTS});
-  }
+  public clearStudents(): void {}
 }

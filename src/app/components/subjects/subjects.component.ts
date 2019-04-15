@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Subject, Student } from "src/app/common/entities";
-import { Button } from "../../shared/components/button/button.module";
+import { Component, OnInit } from "@angular/core";
+import { Subject } from "src/app/common/entities";
+import { ButtonType, Button } from "../../shared/components/button/button.model";
 
-import { DbService } from "../../common/services/db.service";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
+import { IAppState } from "../../store/state/app.state";
 
-import { NgRedux, select } from "@angular-redux/store";
-import { IAppState } from "../../store";
-import { ADD_SUBJECT } from "../../actions";
+import * as AppActions from "../../store/actions/app.actions";
 
 @Component({
   selector: "app-subjects",
@@ -21,40 +21,28 @@ export class SubjectsComponent implements OnInit {
     { label: "Cabinet", isRequired: false, id: "cabinet" }
   ];
 
-  @select() public subjects: Subject[];
+  public subjects$: Observable<Subject[]>;
 
   public button: Button = {
-    class: "btn--add"
+    class: ButtonType.Add
   };
 
-  // public subjects: Subject[];
-  // public studentsList: Student[];
-
   constructor(
-    private dbService: DbService,
-    private ngRedux: NgRedux<IAppState>
-  ) { }
-
-  public ngOnInit(): void {
-    // this.getSubjects();
-    // this.getStudents();
+    private _store: Store<IAppState>
+  ) {
+    this.subjects$ = _store.select(state => state.journal.subjects);
   }
 
-  // public getSubjects(): void {
-  //   this.dbService.getSubjects()
-  //     .subscribe(subjects => this.subjects = subjects);
-  // }
-
-  // public getStudents(): void {
-  //   this.dbService.getStudents()
-  //     .subscribe(students => this.studentsList = students);
-  // }
+  public ngOnInit(): void {}
 
   public addSubject(subject: Subject): void {
-
-    this.ngRedux.dispatch({type: ADD_SUBJECT, subject: subject});
-
-    // this.dbService.addSubject(subject)
-    //   .subscribe(subjects => this.subjects = subjects);
+    let _subject = {
+      id: subject.id,
+      name: subject.name,
+      teacher: subject.teacher,
+      cabinet: +subject.cabinet,
+      description: subject.description
+    }
+    this._store.dispatch(new AppActions.AddSubject(_subject));
   }
 }
