@@ -18,7 +18,7 @@
     "name": "Name",
     "lastName": "Last Name",
     "averageMark": "Average Mark",
-    "teacherNameLabel": "Teacher:",
+    "Name": "Teacher:",
     "placeholderMark": "Enter mark",
     "placeholderDate": "Enter date"
   },

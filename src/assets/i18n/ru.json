@@ -18,7 +18,7 @@
     "name": "Имя",
     "lastName": "Фамилия",
     "averageMark": "Средний бал",
-    "teacherNameLabel": "Учитель:",
+    "Name": "Учитель:",
     "placeholderMark": "Введите оценку",
     "placeholderDate": "Введите дату"
   },
