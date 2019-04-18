@@ -1,0 +1,34 @@
+<div>
+  <form 
+    [formGroup]="statisticForm"
+    (change)="onChanges()"
+    >
+    <div class="select__wrapper">
+      <label class="select__label">Select subject</label>
+      <ng-select
+        formControlName="subject"
+        [items]="subjects"
+        bindLabel="name"
+        placeholder="Select subject"
+        [(ngModel)]="selectedSubject">
+      </ng-select>
+    </div>
+    <div class="select__wrapper" *ngIf="selectedSubject">
+      <label class="select__label">Select date</label>
+      <ng-select
+        formControlName="date"
+        [items]="selectedSubject.date"
+        bindLabel="date"
+        placeholder="Select day"
+        [(ngModel)]="selectedDay">
+      </ng-select>
+      <p class="info__message">{{infoMessage}}</p>
+    </div>
+  </form>
+  <div *ngIf="result.length > 0" class="statistic__result">
+    <p>{{result.length}} student(s) got mark in this day</p>
+    <ul>
+      <li *ngFor="let student of result">{{student.name}} {{student.lastName}} - {{student.mark}}</li>
+    </ul>
+  </div>
+</div>
