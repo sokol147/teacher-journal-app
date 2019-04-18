@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -26,7 +26,10 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreModule } from "@ngrx/store";
 
-import { reducer } from "./store/reducers/app.reducer";
+import { appReducer } from "./store/reducers/app.reducer";
+import { StatisticComponent } from "./components/statistic/statistic.component";
+
+import { NgSelectModule } from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [
@@ -36,18 +39,20 @@ import { reducer } from "./store/reducers/app.reducer";
     SubjectTableComponent,
     SortingStudentsPipe,
     PartyTimePipe,
-    DefaultMarkPipe
+    DefaultMarkPipe,
+    StatisticComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
 
-    StoreModule.forRoot({ journal: reducer }),
-    
+    StoreModule.forRoot(appReducer),
+
     StoreRouterConnectingModule.forRoot({stateKey: "router"}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
@@ -57,13 +62,15 @@ import { reducer } from "./store/reducers/app.reducer";
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
 
-export function HttpLoaderFactory(http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
