@@ -2,6 +2,9 @@ import * as AppActions from "../actions/app.actions";
 import { STUDENTS } from "src/app/mock-students";
 import { SUBJECTS } from "src/app/mock-subjects";
 import { IAppState } from "../state/app.state";
+import { ActionReducerMap } from "@ngrx/store";
+import { routerReducer } from "@ngrx/router-store";
+import { Subject, Student } from "src/app/common/entities";
 
 const localStudents = JSON.parse(localStorage.getItem("students"));
 const localSubjects = JSON.parse(localStorage.getItem("subjects"));
@@ -11,7 +14,7 @@ const initialAppState = {
   subjects: (localSubjects === null) ? SUBJECTS : localSubjects,
 };
 
-export function reducer(state = initialAppState, action: AppActions.Actions) {
+export const reducer = (state = initialAppState, action: AppActions.Actions) => {
   switch (action.type) {
     case AppActions.ADD_STUDENT:
       action.payload.id = state.students.length + 1;
@@ -20,7 +23,7 @@ export function reducer(state = initialAppState, action: AppActions.Actions) {
           name: action.payload.name,
           lastName: action.payload.lastName,
           averageMark: undefined,
-          marks: [{ day: "", mark: "" }]
+          marks: []
         });
       });
       localStorage.setItem("subjects", JSON.stringify(state.subjects));
@@ -31,14 +34,14 @@ export function reducer(state = initialAppState, action: AppActions.Actions) {
       });
     case AppActions.ADD_SUBJECT:
       action.payload.id = state.subjects.length + 1;
-      action.payload.date = [ "" ];
+      action.payload.date = [];
       action.payload.students = [];
       state.students.forEach(student => {
         action.payload.students.push({
           name: student.name,
           lastName: student.lastName,
           averageMark: undefined,
-          marks: [{ day: "", mark: "" }]
+          marks: []
         });
       });
       localStorage.setItem("subjects", JSON.stringify([ ...state.subjects, action.payload ]));
@@ -48,4 +51,9 @@ export function reducer(state = initialAppState, action: AppActions.Actions) {
     default:
       return state;
   }
-}
+};
+
+export const appReducer: ActionReducerMap<any> = {
+  router: routerReducer,
+  journal: reducer
+};

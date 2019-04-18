@@ -1,12 +1,12 @@
-// import { Action } from "@ngrx/store";
-// import { Student } from "../../common/entities";
+import { Action } from "@ngrx/store";
+import { Student } from "../../common/entities";
 
-// export const ADD_STUDENT: string = "[STUDENT] Add";
+export const ADD_STUDENT: string = "[STUDENT] Add";
 
-// export class AddStudent implements Action {
-//   public readonly type = ADD_STUDENT;
+export class AddStudent implements Action {
+  public readonly type = ADD_STUDENT;
 
-//   constructor(public payload: Student) {}
-// }
+  constructor(public payload: Student) {}
+}
 
-// export type Actions = AddStudent;
+export type StudentActions = AddStudent;
