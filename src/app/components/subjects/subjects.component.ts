@@ -21,28 +21,30 @@ export class SubjectsComponent implements OnInit {
     { label: "Cabinet", isRequired: false, id: "cabinet" }
   ];
 
-  public subjects$: Observable<Subject[]>;
+  public subjects$: Observable<any>;
 
   public button: Button = {
     class: ButtonType.Add
   };
 
   constructor(
-    private _store: Store<IAppState>
+    private _store: Store<any>
   ) {
-    this.subjects$ = _store.select(state => state.journal.subjects);
+    this.subjects$ = _store.select(state => {
+      return state.journal.subjects;
+    });
   }
 
   public ngOnInit(): void {}
 
   public addSubject(subject: Subject): void {
-    let _subject = {
+    let _subject: Subject = {
       id: subject.id,
       name: subject.name,
       teacher: subject.teacher,
       cabinet: +subject.cabinet,
       description: subject.description
-    }
+    };
     this._store.dispatch(new AppActions.AddSubject(_subject));
   }
 }
