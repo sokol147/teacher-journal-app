@@ -2,7 +2,8 @@
   "title": "Teacher Journal",
   "nav": {
     "students": "Students",
-    "subjects": "Subjects"
+    "subjects": "Subjects",
+    "statistic": "Statistic"
   },
   "studentsTable": {
     "id": "Id",

@@ -2,7 +2,8 @@
   "title": "Журнал Учителя",
   "nav": {
     "students": "Студенты",
-    "subjects": "Предметы"
+    "subjects": "Предметы",
+    "statistic": "Статистика"
   },
   "studentsTable": {
     "id": "Ид",
