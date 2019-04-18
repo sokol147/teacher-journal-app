@@ -39,13 +39,13 @@ export class StudentsComponent implements OnInit {
   public ngOnInit(): void {}
 
   public addStudent(student: Student): void {
-    let _student = {
+    let _student: Student = {
       id: student.id,
       name: student.name,
       lastName: student.lastName,
-      desctiption: student.description,
+      description: student.description,
       address: student.address,
-    }
+    };
     this._store.dispatch(new AppActions.AddStudent(_student));
   }
 
