@@ -22,4 +22,14 @@ export class SubjectService {
   public getSubject(name: string): Observable<Subject> {
     return of(SUBJECTS.find(subject => subject.name === name));
   }
+
+  public getCurrentDate(): Observable<string> {
+    let d: Date = new Date();
+    let currentMonth: string = (d.getMonth() + 1).toString();
+    if (currentMonth.length === 1) { currentMonth = `0${currentMonth}`; }
+    let currentDay: string = d.getDate().toString();
+    if (currentDay.length === 1) { currentDay = `0${currentDay}`; }
+    let currentDate: string = `${currentMonth}/${currentDay}`;
+    return of(currentDate);
+  }
 }
