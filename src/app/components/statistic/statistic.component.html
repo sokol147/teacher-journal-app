@@ -4,29 +4,29 @@
     (change)="onChanges()"
     >
     <div class="select__wrapper">
-      <label class="select__label">Select subject</label>
+      <label class="select__label">{{ 'statistic.selectSubject' | translate }}</label>
       <ng-select
         formControlName="subject"
         [items]="subjects"
         bindLabel="name"
-        placeholder="Select subject"
+        placeholder="{{ 'statistic.selectSubject' | translate }}"
         [(ngModel)]="selectedSubject">
       </ng-select>
     </div>
     <div class="select__wrapper" *ngIf="selectedSubject">
-      <label class="select__label">Select date</label>
+      <label class="select__label">{{ 'statistic.selectDate' | translate }}</label>
       <ng-select
         formControlName="date"
         [items]="selectedSubject.date"
         bindLabel="date"
-        placeholder="Select day"
+        placeholder="{{ 'statistic.selectDate' | translate }}"
         [(ngModel)]="selectedDay">
       </ng-select>
       <p class="info__message">{{infoMessage}}</p>
     </div>
   </form>
   <div *ngIf="result.length > 0" class="statistic__result">
-    <p>{{result.length}} student(s) got mark in this day</p>
+    <p>{{result.length}} {{ 'statistic.message' | translate }}</p>
     <ul>
       <li *ngFor="let student of result">{{student.name}} {{student.lastName}} - {{student.mark}}</li>
     </ul>
