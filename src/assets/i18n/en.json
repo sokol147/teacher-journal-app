@@ -1,50 +1,27 @@
 {
   "title": "Teacher Journal",
-  "nav": {
-    "students": "Students",
-    "subjects": "Subjects",
-    "statistic": "Statistic"
-  },
-  "studentsTable": {
-    "id": "Id",
-    "name": "Name",
-    "lastName": "Last Name",
-    "address": "Address",
-    "description": "Description"
-  },
-  "students": {
-    "formTitle": "Add new Student"
-  },
-  "subjectsTable": {
-    "name": "Name",
-    "lastName": "Last Name",
-    "averageMark": "Average Mark",
-    "Name": "Teacher:",
-    "placeholderMark": "Enter mark",
-    "placeholderDate": "Enter date"
-  },
-  "subjects": {
-    "title": "List of Subjects:",
-    "formTitle": "Add new Subject"
-  },
-  "form": {
-    "buttonText": "Add",
-    "descriptionTextareaLabel": "Descriptions",
-    "inputLabelname": "Name",
-    "inputLabellastName": "Last Name",
-    "inputLabeladdress": "Address",
-    "inputLabelteacher": "Teacher",
-    "inputLabelcabinet": "Cabinet"
-  },
-  "button": {
-    "buttonsave": "Save",
-    "button+": "+"
-  },
-  "statistic": {
-    "selectSubject": "Select subject",
-    "selectDate": "Select date",
-    "message": "student(s) got mark in this day",
-    "infoMessage": "chose date",
-    "infoMessageNoSubject": "there was no"
-  }
+  "students": "Students",
+  "subjects": "Subjects",
+  "statistic": "Statistic",
+  "id": "Id",
+  "name": "Name",
+  "lastName": "Last Name",
+  "address": "Address",
+  "cabinet": "Cabinet",
+  "description": "Description",
+  "studentsFormTitle": "Add new Student",
+  "averageMark": "Average Mark",
+  "teacher": "Teacher",
+  "placeholderMark": "Enter mark",
+  "placeholderDate": "Enter date",
+  "subjectsTitle": "List of Subjects:",
+  "subjectsFormTitle": "Add new Subject",
+  "buttonText": "Add",
+  "buttonsave": "Save",
+  "button+": "+",
+  "selectSubject": "Select subject",
+  "selectDate": "Select date",
+  "message": "student(s) got mark in this day",
+  "infoMessage": "chose date",
+  "infoMessageNoSubject": "there was no"
 }

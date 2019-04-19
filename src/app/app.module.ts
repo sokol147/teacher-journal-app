@@ -52,7 +52,6 @@ import { NgSelectModule } from "@ng-select/ng-select";
     HttpClientModule,
 
     StoreModule.forRoot(appReducer),
-
     StoreRouterConnectingModule.forRoot({stateKey: "router"}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 

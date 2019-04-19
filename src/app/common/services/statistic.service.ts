@@ -22,12 +22,12 @@ export class StatisticService {
     let result: ITmprStudent[] = [];
     let message: string = "";
     if (subject !== undefined && day === null) {
-      message = this.tsService.instant('statistic.infoMessage')
+      message = this.tsService.instant('infoMessage')
       result = [];
     }
     if (subject !== undefined && typeof(day) === "string") {
       message = (_.includes(subject.date, day)) ? "" :
-        `${day} ${this.tsService.instant('statistic.infoMessageNoSubject')} ${subject.name}`;
+        `${day} ${this.tsService.instant('infoMessageNoSubject')} ${subject.name}`;
       result = [];
       subject.students.forEach(student => {
         student.marks.forEach(date => {

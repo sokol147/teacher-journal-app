@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Student } from "../../common/entities";
 import { ButtonType, Button } from "../../shared/components/button/button.model";
 
@@ -8,12 +8,21 @@ import { IAppState } from "../../store/state/app.state";
 
 import * as AppActions from "../../store/actions/app.actions";
 
+import { TranslateService } from '@ngx-translate/core'
+
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.scss"]
 })
-export class StudentsComponent implements OnInit {
+export class StudentsComponent {
+
+  constructor(
+    private _store: Store<any>,
+    private tsService: TranslateService
+  ) {
+    this.students$ = _store.select(state => state.journal.students);
+  }
 
   private button: Button = {
     class: ButtonType.Add
@@ -25,18 +34,10 @@ export class StudentsComponent implements OnInit {
     { label: "Address", isRequired: false, id: "address" }
   ];
 
-  public students$: Observable<Student[]>;
+  public students$: Observable<Array<Student>>;
 
   public path: string[] = ["students"];
   public order: number = -1;
-
-  constructor(
-    private _store: Store<any>
-  ) {
-    this.students$ = _store.select(state => state.journal.students);
-  }
-
-  public ngOnInit(): void {}
 
   public addStudent(student: Student): void {
     let _student: Student = {
