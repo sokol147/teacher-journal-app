@@ -2,11 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Subject } from "src/app/common/entities";
 import { ButtonType, Button } from "../../shared/components/button/button.model";
 
-import { Observable } from "rxjs";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 
-import * as AppActions from "../../store/actions/app.actions";
+import { AppComponent } from 'src/app/root/app.component';
+import { AddSubject } from 'src/app/store/actions/app.actions';
+import { selectSubjectList } from 'src/app/store/selectors/subject.selector';
 
 @Component({
   selector: "app-subjects",
@@ -21,21 +22,18 @@ export class SubjectsComponent implements OnInit {
     { label: "Cabinet", isRequired: false, id: "cabinet" }
   ];
 
-  public subjects$: Observable<any>;
-
   public button: Button = {
     class: ButtonType.Add
   };
 
   constructor(
-    private _store: Store<any>
-  ) {
-    this.subjects$ = _store.select(state => {
-      return state.journal.subjects;
-    });
-  }
+    private _store: Store<IAppState>,
+    private appComponent: AppComponent
+  ) {}
 
   public ngOnInit(): void {}
+
+  subjects$ = this._store.pipe(select(selectSubjectList))
 
   public addSubject(subject: Subject): void {
     let _subject: Subject = {
@@ -45,6 +43,7 @@ export class SubjectsComponent implements OnInit {
       cabinet: +subject.cabinet,
       description: subject.description
     };
-    this._store.dispatch(new AppActions.AddSubject(_subject));
+    this._store.dispatch(new AddSubject(_subject));
+    this.appComponent.createComponent('Subject successfuly added', 'success');
   }
 }
