@@ -30,6 +30,11 @@ import { appReducer } from "./store/reducers/app.reducer";
 import { StatisticComponent } from "./components/statistic/statistic.component";
 
 import { NgSelectModule } from "@ng-select/ng-select";
+import { MessageComponent } from './components/message/message.component';
+
+import { EffectsModule } from '@ngrx/effects';
+import { SubjectEffects } from './store/effects/subject.effects';
+import { JournalEffects } from './store/effects/journal.effects';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,8 @@ import { NgSelectModule } from "@ng-select/ng-select";
     SortingStudentsPipe,
     PartyTimePipe,
     DefaultMarkPipe,
-    StatisticComponent
+    StatisticComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -50,11 +56,10 @@ import { NgSelectModule } from "@ng-select/ng-select";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot([SubjectEffects, JournalEffects]),
     StoreRouterConnectingModule.forRoot({stateKey: "router"}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -62,10 +67,10 @@ import { NgSelectModule } from "@ng-select/ng-select";
         deps: [HttpClient]
       }
     }),
-
     NgSelectModule
   ],
   providers: [],
+  entryComponents: [MessageComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
