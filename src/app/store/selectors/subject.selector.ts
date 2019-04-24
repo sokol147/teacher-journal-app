@@ -1,7 +1,7 @@
-import { createSelector } from '@ngrx/store';
+import { createSelector } from "@ngrx/store";
 
-import { IAppState } from '../state/app.state';
-import { ISubjectState } from '../state/subject.state';
+import { IAppState } from "../state/app.state";
+import { ISubjectState } from "../state/subject.state";
 
 const selectSubjects = (state) => state.journal;
 

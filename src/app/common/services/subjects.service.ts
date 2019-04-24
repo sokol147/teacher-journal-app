@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 
-import { Subject } from "../../common/entities";
+import { ISubject } from "../../common/entities";
 import { SUBJECTS } from "src/app/mock-subjects";
 
 @Injectable({
@@ -9,17 +9,17 @@ import { SUBJECTS } from "src/app/mock-subjects";
 })
 export class SubjectService {
 
-  public getSubjects(): Observable<Subject[]> {
+  public getSubjects(): Observable<ISubject[]> {
     return of(SUBJECTS);
   }
 
-  public addSubject(subject: Subject): Observable<Subject[]> {
+  public addSubject(subject: ISubject): Observable<ISubject[]> {
     subject.id = SUBJECTS.length + 1;
     SUBJECTS.push(subject);
     return of(SUBJECTS);
   }
 
-  public getSubject(name: string): Observable<Subject> {
+  public getSubject(name: string): Observable<ISubject> {
     return of(SUBJECTS.find(subject => subject.name === name));
   }
 

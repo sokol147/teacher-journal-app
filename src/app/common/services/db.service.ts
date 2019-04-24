@@ -2,18 +2,18 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 
 import { DATABASE } from "../../mock-db";
-import { Student, Subject } from "../entities";
+import { IStudent, ISubject } from "../entities";
 
 @Injectable({
   providedIn: "root"
 })
 export class DbService {
 
-  public getStudents(): Observable<Student[]> {
+  public getStudents(): Observable<IStudent[]> {
     return of(DATABASE.students);
   }
 
-  public addStudent(student: Student): Observable<Student[]> {
+  public addStudent(student: IStudent): Observable<IStudent[]> {
     student.id = DATABASE.students.length + 1;
     DATABASE.students.push(student);
     DATABASE.subjects.forEach(subject => {
@@ -32,11 +32,11 @@ export class DbService {
     return of(DATABASE.students);
   }
 
-  public getSubjects(): Observable<Subject[]> {
+  public getSubjects(): Observable<ISubject[]> {
     return of(DATABASE.subjects);
   }
 
-  public addSubject(subject: Subject): Observable<Subject[]> {
+  public addSubject(subject: ISubject): Observable<ISubject[]> {
     subject.id = DATABASE.subjects.length + 1;
     subject.date = [ "06/01" ];
     subject.students = [];
@@ -57,7 +57,7 @@ export class DbService {
     return of(DATABASE.subjects);
   }
 
-  public getSubject(name: string): Observable<Subject> {
+  public getSubject(name: string): Observable<ISubject> {
     return of(DATABASE.subjects.find(subject => subject.name === name));
   }
 }

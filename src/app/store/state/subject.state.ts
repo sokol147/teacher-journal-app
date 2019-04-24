@@ -1,12 +1,12 @@
-import { Subject } from "../../common/entities";
+import { ISubject } from "../../common/entities";
 import { SUBJECTS } from "src/app/mock-subjects";
 
 export interface ISubjectState {
-  subjects: Subject[];
-  selectedSubject: Subject;
+  subjects: ISubject[];
+  selectedSubject: ISubject;
 }
 
-const localSubjects: any = JSON.parse(localStorage.getItem("subjects"));
+const localSubjects: ISubject[] = JSON.parse(localStorage.getItem("subjects"));
 
 export const initialSubjectState: ISubjectState = {
   subjects: (localSubjects === null) ? SUBJECTS : localSubjects,

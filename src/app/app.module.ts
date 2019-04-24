@@ -30,11 +30,11 @@ import { appReducer } from "./store/reducers/app.reducer";
 import { StatisticComponent } from "./components/statistic/statistic.component";
 
 import { NgSelectModule } from "@ng-select/ng-select";
-import { MessageComponent } from './components/message/message.component';
+import { MessageComponent } from "./components/message/message.component";
 
-import { EffectsModule } from '@ngrx/effects';
-import { SubjectEffects } from './store/effects/subject.effects';
-import { JournalEffects } from './store/effects/journal.effects';
+import { EffectsModule } from "@ngrx/effects";
+import { SubjectEffects } from "./store/effects/subject.effects";
+import { JournalEffects } from "./store/effects/journal.effects";
 
 @NgModule({
   declarations: [

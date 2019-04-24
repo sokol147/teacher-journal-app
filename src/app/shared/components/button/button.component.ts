@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 
-import { Button } from "../../../common/entities";
+import { IButton } from "../../../common/entities";
 
 @Component({
   selector: "app-button",
@@ -9,11 +9,9 @@ import { Button } from "../../../common/entities";
 })
 export class ButtonComponent {
 
-  @Input() public type: Button;
+  @Input() public type: IButton;
 
   public text: string = "";
-
-  constructor() {}
 
   public ngOnInit(): void {
     switch (this.type.class) {

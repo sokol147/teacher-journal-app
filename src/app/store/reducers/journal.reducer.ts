@@ -1,10 +1,11 @@
-import { STUDENTS } from 'src/app/mock-students';
-import { SUBJECTS } from 'src/app/mock-subjects';
-import { Actions, ADD_STUDENT, ADD_SUBJECT } from '../actions/app.actions';
-import { GetSubjectSuccess, ESubjectActions } from '../actions/subject.actions';
+import { STUDENTS } from "src/app/mock-students";
+import { SUBJECTS } from "src/app/mock-subjects";
+import { Actions, ADD_STUDENT, ADD_SUBJECT } from "../actions/app.actions";
+import { GetSubjectSuccess, ESubjectActions } from "../actions/subject.actions";
+import { IStudent, ISubject } from "src/app/common/entities";
 
-const localStudents = JSON.parse(localStorage.getItem("students"));
-const localSubjects = JSON.parse(localStorage.getItem("subjects"));
+const localStudents: IStudent[] = JSON.parse(localStorage.getItem("students"));
+const localSubjects: ISubject[] = JSON.parse(localStorage.getItem("subjects"));
 
 const initialJournalState = {
   students: (localStudents === null) ? STUDENTS : localStudents,
@@ -16,27 +17,27 @@ export const journalReducer = (
   state = initialJournalState,
   action: Actions
 ) => {
-  switch(action.type){
+  switch (action.type) {
     case ADD_STUDENT: {
       return {
         ...state,
         subjects: state.subjects,
         students: [ ...state.students, action.payload ]
-      }
+      };
     }
     case ADD_SUBJECT: {
       return {
         ...state,
         subjects: [ ...state.subjects, action.payload ]
-      }
+      };
     }
     case ESubjectActions.GetSubjectSuccess: {
       return {
         ...state,
         selectedSubject: action.payload
-      }
+      };
     }
     default:
       return state;
   }
-}
+};

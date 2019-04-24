@@ -1,13 +1,13 @@
 import { Action } from "@ngrx/store";
-import { Student } from "../../common/entities";
+import { IStudent } from "../../common/entities";
 
 export enum EStudentActions {
-  AddStudent = '[Student] Add Student'
+  AddStudent = "[Student] Add Student"
 }
 
 export class AddStudent implements Action {
-  public readonly type = EStudentActions.AddStudent;
-  constructor(public payload: Student) {}
+  public readonly type: string = EStudentActions.AddStudent;
+  constructor(public payload: IStudent) {}
 }
 
 export type StudentActions = AddStudent;

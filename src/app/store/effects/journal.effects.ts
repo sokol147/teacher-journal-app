@@ -1,18 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Effect, ofType, Actions } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
-import { of } from 'rxjs';
-import { switchMap, map, withLatestFrom, tap } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Effect, ofType, Actions } from "@ngrx/effects";
+import { Store, select } from "@ngrx/store";
+import { of, Observable } from "rxjs";
+import { switchMap, map, withLatestFrom, tap } from "rxjs/operators";
 
-import { AddSubject, AddStudent } from '../actions/app.actions';
+import { AddSubject, AddStudent } from "../actions/app.actions";
+import { IAppState } from '../state/app.state';
 
 @Injectable()
 export class JournalEffects {
   @Effect()
-  addSubject$ = this._actions$.pipe(
-    ofType<AddSubject>('[SUBJECT] Add Subject'),
+  public addSubject$: Observable<any> = this._actions$.pipe(
+    ofType<AddSubject>("[SUBJECT] Add Subject"),
     map(action => action.payload),
-    withLatestFrom(this._store.select('journal')),
+    withLatestFrom(this._store.select("journal")),
     switchMap(([subject, store]) => {
       subject.id = store.subjects.length;
       subject.date = [];
@@ -26,25 +27,25 @@ export class JournalEffects {
         });
       });
       localStorage.setItem("subjects", JSON.stringify(store.subjects));
-      return of()
+      return of();
     })
-  )
+  );
 
   @Effect()
-   addStudent$ = this._actions$.pipe(
-    ofType<AddStudent>('[STUDENT] Add Student'),
+   public addStudent$: Observable<any> = this._actions$.pipe(
+    ofType<AddStudent>("[STUDENT] Add Student"),
     map(action => action.payload),
-    withLatestFrom(this._store.select('journal')),
+    withLatestFrom(this._store.select("journal")),
     switchMap(([student, store]) => {
       student.id = store.students.length;
       store.subjects.forEach(subject => {
-        let marks = []
+        let marks = [];
         subject.date.forEach(date => {
           marks.push({
             day: date,
-            mark: ''
-          })
-        })
+            mark: ""
+          });
+        });
         subject.students.push({
           name: student.name,
           lastName: student.lastName,
@@ -56,7 +57,7 @@ export class JournalEffects {
       localStorage.setItem("students", JSON.stringify(store.students));
       return of();
     })
-  )
+  );
 
   constructor(
     private _actions$: Actions,

@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from "@angular/core";
 
-import { MessageComponent } from '../components/message/message.component';
+import { MessageComponent } from "../components/message/message.component";
 
 import { TranslateService } from "@ngx-translate/core";
 
@@ -11,12 +11,11 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AppComponent {
 
-  @ViewChild('messagecontainer', {read: ViewContainerRef}) entry: ViewContainerRef;
-
+  @ViewChild("messagecontainer", {read: ViewContainerRef}) public entry: ViewContainerRef;
 
   public title: string = "Teacher Journal";
 
-  componentRef: any;
+  public componentRef: any;
 
   constructor(
     private translate: TranslateService,
@@ -29,18 +28,18 @@ export class AppComponent {
     this.translate.use(language);
   }
 
-  createComponent(message, type) {
+  public createComponent(message: string, type: string): void {
     this.entry.clear();
-    const factory = this.resolver.resolveComponentFactory(MessageComponent);
+    const factory: any = this.resolver.resolveComponentFactory(MessageComponent);
     this.componentRef = this.entry.createComponent(factory);
     this.componentRef.instance.message = message;
     this.componentRef.instance.type = type;
     setTimeout(() => {
-      this.destroyComponent()
-    }, 5000)
+      this.destroyComponent();
+    },         5000);
   }
 
-  destroyComponent() {
+  public destroyComponent(): void {
     this.componentRef.destroy();
   }
 }

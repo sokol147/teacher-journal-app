@@ -1,14 +1,16 @@
 import { Component } from "@angular/core";
-import { Student } from "../../common/entities";
-import { ButtonType, Button } from "../../shared/components/button/button.model";
+import { IStudent } from "../../common/entities";
+import { ButtonType, IButton } from "../../shared/components/button/button.model";
 
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 
-import { AddStudent } from '../../store/actions/app.actions';
+import { AddStudent } from "../../store/actions/app.actions";
 
-import {AppComponent } from '../../root/app.component'
-import { selectStudentList } from 'src/app/store/selectors/student.selector';
+import {AppComponent } from "../../root/app.component";
+import { selectStudentList } from "src/app/store/selectors/student.selector";
+import { Observable } from 'rxjs';
+import { IStudentState } from 'src/app/store/state/student.state';
 
 @Component({
   selector: "app-students",
@@ -17,14 +19,7 @@ import { selectStudentList } from 'src/app/store/selectors/student.selector';
 })
 export class StudentsComponent {
 
-  students$ = this._store.pipe(select(selectStudentList));
-
-  constructor(
-    private _store: Store<IAppState>,
-    private appComponent: AppComponent
-  ) {}
-
-  private button: Button = {
+  private button: IButton = {
     class: ButtonType.Add
   };
 
@@ -34,11 +29,18 @@ export class StudentsComponent {
     { label: "Address", isRequired: false, id: "address" }
   ];
 
+  public students$: Observable<IStudentState> = this._store.pipe(select(selectStudentList));
+
   public path: string[] = ["students"];
   public order: number = -1;
 
-  public addStudent(student: Student): void {
-    let _student: Student = {
+  constructor(
+    private _store: Store<IAppState>,
+    private appComponent: AppComponent
+  ) {}
+
+  public addStudent(student: IStudent): void {
+    let _student: IStudent = {
       id: student.id,
       name: student.name,
       lastName: student.lastName,
@@ -46,7 +48,7 @@ export class StudentsComponent {
       address: student.address,
     };
     this._store.dispatch(new AddStudent(_student));
-    this.appComponent.createComponent('Student successfuly added', 'success');
+    this.appComponent.createComponent("Student successfuly added", "success");
   }
 
   public sortTable(prop: string): boolean {
@@ -54,7 +56,5 @@ export class StudentsComponent {
     this.order = this.order * (-1);
     return false;
   }
-
-  public clearStudents(): void {}
 
 }

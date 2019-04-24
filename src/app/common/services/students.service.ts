@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 
-import { Student } from "../entities";
+import { IStudent } from "../entities";
 import { STUDENTS } from "../../mock-students";
 
 @Injectable({
@@ -9,11 +9,11 @@ import { STUDENTS } from "../../mock-students";
 })
 export class StudentService {
 
-  public getStudents(): Observable<Student[]> {
+  public getStudents(): Observable<IStudent[]> {
     return of(STUDENTS);
   }
 
-  public addStudent(student: Student): Observable<Student[]> {
+  public addStudent(student: IStudent): Observable<IStudent[]> {
     student.id = STUDENTS.length + 1;
     STUDENTS.push(student);
     return of(STUDENTS);

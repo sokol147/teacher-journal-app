@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Subject } from "src/app/common/entities";
+import { ISubject } from "src/app/common/entities";
 import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { StatisticService } from "../../common/services/statistic.service";
@@ -13,15 +13,14 @@ export class StatisticComponent implements OnInit {
 
   public statisticForm = new FormGroup({});
 
-  public subjects: Subject[];
+  public subjects: ISubject[];
   public infoMessage: string;
-  public result = [];
+  public result: any[] = [];
 
   constructor(
-    private fb: FormBuilder,
-    private statService: StatisticService
-    ) {
-  }
+      private fb: FormBuilder,
+      private statService: StatisticService
+    ) {}
 
   public ngOnInit(): void {
     this.subjects = JSON.parse(localStorage.getItem("subjects"));
@@ -38,7 +37,7 @@ export class StatisticComponent implements OnInit {
     });
   }
 
-  public renderStatistic(subject: Subject, day: string): void {
+  public renderStatistic(subject: ISubject, day: string): void {
     this.statService.getStatistic(subject, day)
       .subscribe(res => {
         this.result = res[0];
