@@ -1,4 +1,4 @@
-export class Button {
-  public text: string;
-  public class: string;
+export interface Button {
+  text: string;
+  class: string;
 }

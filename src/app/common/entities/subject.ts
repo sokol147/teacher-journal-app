@@ -1,9 +1,9 @@
-export class Subject {
-  public id: number;
-  public name: string;
-  public teacher: string;
-  public cabinet?: number;
-  public description?: string;
-  public date?: string[];
-  public students?: any[];
+export interface Subject {
+  id: number;
+  name: string;
+  teacher: string;
+  cabinet?: number;
+  description?: string;
+  date?: string[];
+  students?: any[];
 }
