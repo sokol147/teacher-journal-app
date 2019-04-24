@@ -1,20 +1,20 @@
-import { Student } from "../../common/entities";
-
-import * as StudentActions from "../actions/student.actions";
-import { STUDENTS } from "src/app/mock-students";
-
-const initialState: Student[] = STUDENTS;
+import { EStudentActions, StudentActions } from './../actions/student.actions';
+import { initialStudentState, IStudentState } from '../state/student.state';
 
 export const studentReducer = (
-  state: Student[] = initialState,
-  action
-) => {
-  switch (action.type) {
-    case StudentActions.ADD_STUDENT:
-      action.payload.id = state.length + 1;
-      return [...state, action.payload];
-
+  state = initialStudentState,
+  action: StudentActions
+): IStudentState => {
+  switch(action.type){
+    case EStudentActions.AddStudent: {
+      action.payload.id = state.students.length + 1;
+      localStorage.setItem('students', JSON.stringify([...state.students, action.payload]))
+      return {
+        ...state,
+        students: [...state.students, action.payload]
+      }
+    }
     default:
       return state;
   }
-};
+}
