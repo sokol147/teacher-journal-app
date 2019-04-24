@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Subject } from "src/app/common/entities";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { StatisticService } from "../../common/services/statistic.service";
-
-import * as _ from "lodash";
 
 @Component({
   selector: "app-statistic",

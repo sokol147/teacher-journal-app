@@ -1,15 +1,15 @@
 @import '../../../assets/style/variables.scss';
 
-
-.select__wrapper{
-  width: 50%;
-  margin: 0 auto;
-  padding: 1rem 0
-}
-
-.select__label{
-  margin-bottom: 1rem;
-  display: block;
+.select{
+  &__wrapper{
+    width: 50%;
+    margin: 0 auto;
+    padding: 1rem 0
+  }
+  &__label{
+    margin-bottom: 1rem;
+    display: block;
+  }
 }
 
 .info__message{
