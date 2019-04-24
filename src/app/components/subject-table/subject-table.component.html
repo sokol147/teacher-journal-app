@@ -1,25 +1,25 @@
-<div class="subject__inner" *ngIf="subject$ | async">
+<div class="subject__inner" *ngIf="selectedSubject$">
   <div class="table__wrapper">
-    <h3>{{subject.name}}</h3>
+    <h3>{{selectedSubject$.name}}</h3>
     <app-button [type]="buttonPlus" class="subject__btn" (click)="addDay()"></app-button>
     <table class="table table--blue">
       <thead>
         <tr>
-          <th>{{ 'subjectsTable.name' | translate}}</th>
-          <th>{{ 'subjectsTable.lastName' | translate}}</th>
-          <th>{{ 'subjectsTable.averageMark' | translate}}</th>
-          <th *ngFor="let day of subject.date">
+          <th>{{ 'name' | translate}}</th>
+          <th>{{ 'lastName' | translate}}</th>
+          <th>{{ 'averageMark' | translate}}</th>
+          <th *ngFor="let day of selectedSubject$.date">
             <input
               type="text"
               value="{{day}}"
               [(ngModel)]="day"
               class="table__input"
-              placeholder="{{ 'subjectsTable.placeholderDate' | translate}}">
+              placeholder="{{ 'placeholderDate' | translate}}">
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let student of subject.students">
+        <tr *ngFor="let student of selectedSubject$.students">
           <td>{{student.name}}</td>
           <td>{{student.lastName}}</td>
           <td>{{student.averageMark | defaultMark}}</td>
@@ -30,20 +30,20 @@
               [(ngModel)]="mark.mark"
               class="table__input"
               (blur)="calcAverage()"
-              placeholder="{{ 'subjectsTable.placeholderMark' | translate}}">
+              placeholder="{{ 'placeholderMark' | translate}}">
           </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="subject__field">
-    <label class="subject__label">{{ 'subjectsTable.Name' | translate }}
+    <label class="subject__label">{{ 'teacher' | translate }}
       <input 
         class="subject__input"
-        [(ngModel)]="subject.teacher"
+        [(ngModel)]="selectedSubject$.teacher"
         placeholder="teacher"
       >
     </label>
   </div>
-  <app-button [type]="button" (click)="saveSubject()"></app-button>
+  <app-button [type]="button" (click)="saveSubject()" class="btn--save"></app-button>
 </div>

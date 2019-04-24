@@ -4,62 +4,61 @@ import { ActivatedRoute } from "@angular/router";
 import { Subject } from "src/app/common/entities";
 import { ButtonType, Button } from "../../shared/components/button/button.model";
 
-import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import { SubjectService } from "src/app/common/services/subjects.service";
+import { AppComponent } from 'src/app/root/app.component';
+import { GetSubject } from 'src/app/store/actions/subject.actions';
+import { IAppState } from 'src/app/store/state/app.state';
+import * as _ from 'lodash/lang';
 
 @Component({
   selector: "app-subject-table",
   templateUrl: "./subject-table.component.html",
   styleUrls: ["./subject-table.component.scss"]
 })
-export class SubjectTableComponent implements OnInit {
+export class SubjectTableComponent implements OnInit{
 
-  private subject: Subject;
+  constructor(
+    private _store: Store<IAppState>,
+    private route: ActivatedRoute,
+    private subjectService: SubjectService,
+    private appComponent: AppComponent
+  ) {
+    this._store.select('journal', 'selectedSubject').subscribe(data => this.selectedSubject$ = data);
+    this._store.select('journal', 'subjects').subscribe(data => this.subjects$ = data);
+  }
+
+  ngOnInit(){
+    this._store.dispatch(new GetSubject(this.route.snapshot.params.name));
+  }
+
+  private subjects$;
+  private selectedSubject$;
 
   private button: Button = {
     class: ButtonType.Save
   };
-
   private buttonPlus: Button = {
     class: ButtonType.Plus
   };
-  public subject$: Observable<Subject>;
 
-  public currentDate: string;
-
-  constructor(
-    private _store: Store<any>,
-    private route: ActivatedRoute,
-    private subjectService: SubjectService
-  ) {
-    const name: string = this.route.snapshot.paramMap.get("name");
-    this.subject$ = _store.select(state => {
-      this.subject = state.journal.subjects.find(subject => subject.name === name);
-      return state.journal.subjects.find(subject => subject.name === name);
-    });
-  }
-
-  public ngOnInit(): void {}
-
+  private currentDate: string;
   public addDay(): void {
     this.subjectService.getCurrentDate()
       .subscribe(date => this.currentDate = date);
-    this.subject.date.push(this.currentDate);
-    this.subject.students.forEach(student => {
+    this.selectedSubject$.date.push(this.currentDate);
+    this.selectedSubject$.students.forEach(student => {
       student.marks.push({ day: this.currentDate, mark: "" });
     });
   }
 
   public calcAverage(): void {
-    this.subject.students.forEach(student => {
+    this.selectedSubject$.students.forEach(student => {
       let marksSum: number = 0;
       let markCounter: number = 0;
-      student.marks.forEach(mark => {
-        if (+mark.mark !== 0) {
-          marksSum += +mark.mark;
-          markCounter++;
-        }
+      student.marks.filter(item => +item.mark !== 0).forEach(item => {
+        marksSum += +item.mark;
+        markCounter++;
       });
       let result: string = (marksSum / markCounter).toFixed(1);
       student.averageMark = result;
@@ -67,11 +66,13 @@ export class SubjectTableComponent implements OnInit {
   }
 
   public saveSubject(): void {
-    let currentSubj: string = this.subject.name;
-    let localSubjects: Subject[] = JSON.parse(localStorage.getItem("subjects"));
-    for (let i: number = 0; i < localSubjects.length; i++) {
-      if (localSubjects[i].name === currentSubj) { localSubjects[i] = this.subject; }
+    let initialSubjectsState = JSON.parse(localStorage.getItem('subjects'));
+    if(_.isEqual(initialSubjectsState, this.subjects$)){
+      this.appComponent.createComponent('Nothing is changed', 'error');
+    } else {
+      localStorage.setItem("subjects", JSON.stringify(this.subjects$));
+      this.appComponent.createComponent('Saved', 'success');
     }
-    localStorage.setItem("subjects", JSON.stringify(localSubjects));
   }
+
 }
