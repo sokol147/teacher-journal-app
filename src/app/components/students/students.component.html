@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students$ | async | sortingStudents:path:order">
+      <tr *ngFor="let student of students | async | sortingStudents:path:order">
         <td>
           {{student.id}}
         </td>
