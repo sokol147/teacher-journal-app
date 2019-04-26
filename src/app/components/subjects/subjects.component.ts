@@ -9,6 +9,7 @@ import { AppComponent } from "src/app/root/app.component";
 import { AddSubject } from "src/app/store/actions/app.actions";
 import { selectSubjectList } from "src/app/store/selectors/subject.selector";
 import { Observable } from "rxjs";
+import { IFormField } from 'src/app/shared/components/form/form.model';
 
 @Component({
   selector: "app-subjects",
@@ -17,7 +18,7 @@ import { Observable } from "rxjs";
 })
 export class SubjectsComponent {
 
-  private formFields: any[] = [
+  private formFields: IFormField[] = [
     { label: "Name", isRequired: true, id: "name" },
     { label: "Teacher", isRequired: true, id: "teacher" },
     { label: "Cabinet", isRequired: false, id: "cabinet" }
