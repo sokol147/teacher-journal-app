@@ -1,11 +1,11 @@
 import { Component, Input } from "@angular/core";
 
-import { IButton } from "../../../common/entities";
+import { IButton, ButtonType } from "./button.model";
 
 @Component({
   selector: "app-button",
   templateUrl: "./button.component.html",
-  styleUrls: ["./button.component.scss"]
+  styleUrls: ["./button.component.scss"],
 })
 export class ButtonComponent {
 
@@ -15,18 +15,17 @@ export class ButtonComponent {
 
   public ngOnInit(): void {
     switch (this.type.class) {
-      case "btn--add":
+      case ButtonType.Add:
         this.text = "+";
         break;
-      case "btn--save":
+      case ButtonType.Save:
         this.text = "save";
         break;
-      case "btn--plus":
+      case ButtonType.Plus:
         this.text = "+";
         break;
       default:
         this.text = "";
     }
   }
-
 }
