@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
-@Pipe({name: 'sortingStudents'})
+@Pipe({name: "sortingStudents"})
 export class FakeSortingStudentsPipe implements PipeTransform {
-  transform(value: string) { return value }
+  public transform(value: string): string { return value; }
 }
