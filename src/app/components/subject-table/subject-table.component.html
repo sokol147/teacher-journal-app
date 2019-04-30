@@ -8,11 +8,12 @@
           <th>{{ 'name' | translate}}</th>
           <th>{{ 'lastName' | translate}}</th>
           <th>{{ 'averageMark' | translate}}</th>
-          <th *ngFor="let day of selectedSubject$.date">
+          <th *ngFor="let oneDay of selectedSubject$.date">
             <input
               type="text"
-              value="{{day}}"
-              [(ngModel)]="day"
+              value="{{oneDay.day}}"
+              [(ngModel)]="oneDay.day"
+              (blur)="onDateChange()"
               class="table__input"
               placeholder="{{ 'placeholderDate' | translate}}">
           </th>
