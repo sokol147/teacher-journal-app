@@ -8,11 +8,15 @@ export const subjectReducer = (
   switch (action.type) {
     case ESubjectActions.AddSubject: {
       action.payload.id = state.subjects.length + 1;
-      localStorage.setItem("subjects", JSON.stringify([...state.subjects, action.payload]));
       return {
         ...state,
         subjects: [...state.subjects, action.payload],
-        selectedSubject: null
+      };
+    }
+    case ESubjectActions.GetSubjectSuccess: {
+      return {
+        ...state,
+        selectedSubject: action.payload
       };
     }
     default:
