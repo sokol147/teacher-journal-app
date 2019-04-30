@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class DefaultMarkPipe implements PipeTransform {
 
   public transform(value: number, args?: any): any {
-    return (isNaN(value)) ? "-" : value;
+    return (isNaN(value) || value === null) ? "-" : value;
   }
 
 }
