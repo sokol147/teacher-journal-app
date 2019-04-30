@@ -18,7 +18,8 @@
       <ng-select
         formControlName="date"
         [items]="selectedSubject.date"
-        bindLabel="date"
+        bindValue="day"
+        bindLabel="day"
         placeholder="{{ 'selectDate' | translate }}"
         [(ngModel)]="selectedDay">
       </ng-select>
