@@ -3,7 +3,7 @@ import { createSelector } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
 import { IStudentState } from "../state/student.state";
 
-const selectStudents = (state: IAppState): IStudentState => state.journal.students;
+const selectStudents = (state: IAppState): IStudentState => state.students;
 
 export const selectStudentList = createSelector(
   selectStudents,
