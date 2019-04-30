@@ -1,6 +1,6 @@
-import { FormComponent } from './form.component';
+import { FormComponent } from "./form.component";
 
-describe('FormComponent', () => {
+describe("FormComponent", () => {
 
   let value = {
     address: "",
@@ -9,12 +9,12 @@ describe('FormComponent', () => {
     lastName: "",
     name: "",
     teacher: ""
-  }
-  
-  it('raise the submit event when form submited', () => {
+  };
+
+  it("raise the submit event when form submited", () => {
     const comp = new FormComponent();
-    
+
     comp.submitted.subscribe(d => expect(d).toBe(value));
-    comp.onSubmit(value)
-  })
-})
+    comp.onSubmit(value);
+  });
+});
