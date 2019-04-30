@@ -18,7 +18,7 @@ let sharedComponents: any[] = [ButtonComponent, FormComponent];
   ],
   declarations: [ ...sharedComponents ],
   exports: [
-    ...sharedComponents, CommonModule
+    ...sharedComponents, CommonModule, TranslateModule
   ]
 })
 

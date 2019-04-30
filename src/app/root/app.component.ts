@@ -1,4 +1,9 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  ViewContainerRef,
+  ComponentFactoryResolver
+} from "@angular/core";
 
 import { MessageComponent } from "../components/message/message.component";
 
@@ -11,11 +16,11 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AppComponent {
 
-  @ViewChild("messagecontainer", {read: ViewContainerRef}) public entry: ViewContainerRef;
+  @ViewChild("messagecontainer", { read: ViewContainerRef })
+  public entry: ViewContainerRef;
+  public componentRef: any;
 
   public title: string = "Teacher Journal";
-
-  public componentRef: any;
 
   constructor(
     private translate: TranslateService,

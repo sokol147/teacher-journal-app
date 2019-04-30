@@ -12,17 +12,17 @@ export const SUBJECTS: ISubject[] = [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }
     ]
@@ -38,17 +38,17 @@ export const SUBJECTS: ISubject[] = [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }
     ]
@@ -64,17 +64,17 @@ export const SUBJECTS: ISubject[] = [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: undefined,
+        averageMark: null,
         marks: []
       }
     ]

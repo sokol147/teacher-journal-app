@@ -34,7 +34,8 @@ import { MessageComponent } from "./components/message/message.component";
 
 import { EffectsModule } from "@ngrx/effects";
 import { SubjectEffects } from "./store/effects/subject.effects";
-import { JournalEffects } from "./store/effects/journal.effects";
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { StudentEffects } from "./store/effects/student.effects";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { JournalEffects } from "./store/effects/journal.effects";
     PartyTimePipe,
     DefaultMarkPipe,
     StatisticComponent,
-    MessageComponent
+    MessageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,7 @@ import { JournalEffects } from "./store/effects/journal.effects";
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([SubjectEffects, JournalEffects]),
+    EffectsModule.forRoot([SubjectEffects, StudentEffects]),
     StoreRouterConnectingModule.forRoot({stateKey: "router"}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     TranslateModule.forRoot({
