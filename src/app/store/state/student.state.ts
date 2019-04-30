@@ -8,5 +8,5 @@ export interface IStudentState {
 const localStudents: IStudent[] = JSON.parse(localStorage.getItem("students"));
 
 export const initialStudentState: IStudentState = {
-  students: (localStudents === null) ? STUDENTS : localStudents
+  students: (localStudents) ? localStudents : STUDENTS
 };

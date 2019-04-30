@@ -4,21 +4,13 @@ import { ISubjectState, initialSubjectState } from "./subject.state";
 
 export interface IAppState {
   router?: RouterReducerState;
-  students?: IStudentState;
-  subjects?: ISubjectState;
-  journal: {
-    students: IStudentState;
-    subjects: ISubjectState;
-  };
+  students: IStudentState;
+  subjects: ISubjectState;
 }
 
 export const initialAppState: IAppState = {
   students: initialStudentState,
   subjects: initialSubjectState,
-  journal: {
-    students: initialStudentState,
-    subjects: initialSubjectState
-  }
 };
 
 export function getInitialState(): IAppState {

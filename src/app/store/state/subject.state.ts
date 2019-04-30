@@ -9,6 +9,6 @@ export interface ISubjectState {
 const localSubjects: ISubject[] = JSON.parse(localStorage.getItem("subjects"));
 
 export const initialSubjectState: ISubjectState = {
-  subjects: (localSubjects === null) ? SUBJECTS : localSubjects,
+  subjects: (localSubjects) ? localSubjects : SUBJECTS,
   selectedSubject: null
 };
