@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import * as _ from "lodash";
+import * as _ from "lodash/collection";
 import { ISubject } from "../entities";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -21,23 +21,26 @@ export class StatisticService {
   public getStatistic(subject: ISubject, day: string): Observable<any> {
     let result: ITmprStudent[] = [];
     let message: string = "";
-    if (subject !== undefined && day === null) {
+
+    if (subject === null) { result = []; }
+    if (subject && day === null) {
       message = this.tsService.instant("infoMessage");
       result = [];
     }
-    if (subject !== undefined && typeof(day) === "string") {
-      message = (_.includes(subject.date, day)) ? "" :
+    if (subject && typeof day === "string") {
+      message = (_.some(subject.date, {day})) ? "" :
         `${day} ${this.tsService.instant("infoMessageNoSubject")} ${subject.name}`;
       result = [];
       subject.students.forEach(student => {
         student.marks.forEach(date => {
-          if (date.day === day && date.mark !== "") { result.push(
-            {
-              name: student.name,
-              lastName: student.lastName,
-              mark: date.mark
-            }
-          );
+          if (date.day === day && date.mark !== "") {
+            result.push(
+              {
+                name: student.name,
+                lastName: student.lastName,
+                mark: date.mark
+              }
+            );
           }
         });
       });
