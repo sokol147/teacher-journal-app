@@ -4,6 +4,6 @@ export interface ISubject {
   teacher: string;
   cabinet?: number;
   description?: string;
-  date?: string[];
+  date: any[];
   students?: any[];
 }

@@ -4,5 +4,4 @@ export interface IStudent {
   lastName: string;
   address?: string;
   description?: string;
-  marks?: object[];
 }
