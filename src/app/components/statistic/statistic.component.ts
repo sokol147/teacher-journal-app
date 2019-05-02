@@ -7,6 +7,8 @@ import { StatisticService } from "../../common/services/statistic.service";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/store/state/app.state";
 
+import * as _ from 'lodash/array';
+
 @Component({
   selector: "app-statistic",
   templateUrl: "./statistic.component.html",
@@ -25,6 +27,9 @@ export class StatisticComponent implements OnInit {
     private _store: Store<IAppState>
   ) {}
 
+  subjectDates = [];
+  uniqDates = [];
+
   public ngOnInit(): void {
     this._store.select("subjects", "subjects")
       .subscribe(data => this.subjects = data);
@@ -34,6 +39,13 @@ export class StatisticComponent implements OnInit {
       date: null
     });
     this.onChanges();
+
+    this.subjects.forEach(subject => {
+      subject.date.forEach(day => {
+        this.subjectDates.push(day);
+      })
+    })
+    this.uniqDates = _.uniqBy(this.subjectDates, 'day');
   }
 
   public onChanges(): void {
@@ -42,8 +54,8 @@ export class StatisticComponent implements OnInit {
     });
   }
 
-  public renderStatistic(subject: ISubject, day: string): void {
-    this.statService.getStatistic(subject, day)
+  public renderStatistic(subjects: ISubject[], day: string): void {
+    this.statService.getStatistic(subjects, day)
       .subscribe(res => {
         this.result = res[0];
         this.infoMessage = res[1];

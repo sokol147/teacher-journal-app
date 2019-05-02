@@ -8,6 +8,9 @@
       <ng-select
         formControlName="subject"
         [items]="subjects"
+        [multiple]="true"
+        [closeOnSelect]="false"
+        [searchable]="false"
         bindLabel="name"
         placeholder="{{ 'selectSubject' | translate }}"
         [(ngModel)]="selectedSubject">
@@ -17,7 +20,7 @@
       <label class="select__label">{{ 'selectDate' | translate }}</label>
       <ng-select
         formControlName="date"
-        [items]="selectedSubject.date"
+        [items]="uniqDates"
         bindValue="day"
         bindLabel="day"
         placeholder="{{ 'selectDate' | translate }}"
@@ -26,10 +29,14 @@
       <p class="info__message">{{infoMessage}}</p>
     </div>
   </form>
-  <div *ngIf="result.length > 0" class="statistic__result">
-    <p>{{result.length}} {{ 'message' | translate }}</p>
+  <div *ngIf="result" class="statistic__result">
     <ul>
-      <li *ngFor="let student of result">{{student.name}} {{student.lastName}} - {{student.mark}}</li>
+      <li *ngFor="let subj of result">
+        {{subj.name}}
+        <ul>
+          <li *ngFor="let res of subj.result">{{res.name}} {{res.lastName}} got {{res.mark}}</li>
+        </ul>
+      </li>
     </ul>
   </div>
 </div>

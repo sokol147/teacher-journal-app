@@ -18,33 +18,42 @@ export class StatisticService {
 
   constructor(private tsService: TranslateService) { }
 
-  public getStatistic(subject: ISubject, day: string): Observable<any> {
-    let result: ITmprStudent[] = [];
+  public getStatistic(subjects: ISubject[], day: string): Observable<any> {
+    let result = [];
     let message: string = "";
 
-    if (subject === null) { result = []; }
-    if (subject && day === null) {
+    if(!subjects && !day) {
+      result = [];
+    }
+
+    if(subjects && !day){
       message = this.tsService.instant("infoMessage");
       result = [];
     }
-    if (subject && typeof day === "string") {
-      message = (_.some(subject.date, {day})) ? "" :
-        `${day} ${this.tsService.instant("infoMessageNoSubject")} ${subject.name}`;
-      result = [];
-      subject.students.forEach(student => {
-        student.marks.forEach(date => {
-          if (date.day === day && date.mark !== "") {
-            result.push(
-              {
-                name: student.name,
-                lastName: student.lastName,
-                mark: date.mark
-              }
-            );
-          }
-        });
-      });
+
+    if(subjects && day){
+      subjects.forEach(subject => {
+        let subjectResult = {
+          name: subject.name,
+          result: []
+        }
+        subject.students.forEach(student => {
+          student.marks.forEach(date => {
+            if(date.day === day && date.mark !== ""){
+              subjectResult.result.push(
+                {
+                  name: student.name,
+                  lastName: student.lastName,
+                  mark: date.mark
+                }
+              )
+            }
+          })
+        })
+        result.push(subjectResult)
+      })
     }
+
     return of([result, message]);
   }
 }
