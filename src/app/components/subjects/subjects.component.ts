@@ -1,12 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Subject, Student } from "src/app/common/entities";
-import { Button } from "../../shared/components/button/button.module";
+import { Component, OnInit } from "@angular/core";
+import { ISubject } from "src/app/common/entities";
+import { ButtonType, IButton } from "../../shared/components/button/button.model";
 
-import { DbService } from "../../common/services/db.service";
+import { Store, select } from "@ngrx/store";
+import { IAppState } from "../../store/state/app.state";
 
-import { NgRedux, select } from "@angular-redux/store";
-import { IAppState } from "../../store";
-import { ADD_SUBJECT } from "../../actions";
+import { AppComponent } from "src/app/root/app.component";
+// import { AddSubject } from "src/app/store/actions/app.actions";
+import { AddSubject } from "../../store/actions/subject.actions";
+import { IFormField } from "src/app/shared/components/form/form.model";
 
 @Component({
   selector: "app-subjects",
@@ -15,46 +17,38 @@ import { ADD_SUBJECT } from "../../actions";
 })
 export class SubjectsComponent implements OnInit {
 
-  private formFields: any[] = [
+  private formFields: IFormField[] = [
     { label: "Name", isRequired: true, id: "name" },
     { label: "Teacher", isRequired: true, id: "teacher" },
     { label: "Cabinet", isRequired: false, id: "cabinet" }
   ];
 
-  @select() public subjects: Subject[];
-
-  public button: Button = {
-    class: "btn--add"
+  public button: IButton = {
+    class: ButtonType.Add
   };
 
-  // public subjects: Subject[];
-  // public studentsList: Student[];
+  public subjects;
 
   constructor(
-    private dbService: DbService,
-    private ngRedux: NgRedux<IAppState>
-  ) { }
+    private _store: Store<IAppState>,
+    private appComponent: AppComponent
+  ) {}
 
   public ngOnInit(): void {
-    // this.getSubjects();
-    // this.getStudents();
+    this._store.select("subjects", "subjects")
+      .subscribe(data => this.subjects = data);
   }
 
-  // public getSubjects(): void {
-  //   this.dbService.getSubjects()
-  //     .subscribe(subjects => this.subjects = subjects);
-  // }
-
-  // public getStudents(): void {
-  //   this.dbService.getStudents()
-  //     .subscribe(students => this.studentsList = students);
-  // }
-
-  public addSubject(subject: Subject): void {
-
-    this.ngRedux.dispatch({type: ADD_SUBJECT, subject: subject});
-
-    // this.dbService.addSubject(subject)
-    //   .subscribe(subjects => this.subjects = subjects);
+  public addSubject(subject: ISubject): void {
+    let _subject: ISubject = {
+      id: subject.id,
+      name: subject.name,
+      teacher: subject.teacher,
+      cabinet: +subject.cabinet,
+      description: subject.description,
+      date: []
+    };
+    this._store.dispatch(new AddSubject(_subject));
+    this.appComponent.createComponent("Subject successfuly added", "success");
   }
 }

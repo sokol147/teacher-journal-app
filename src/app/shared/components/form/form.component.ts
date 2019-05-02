@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
+import { IFormField } from "./form.model";
 
 @Component({
   selector: "app-form",
@@ -8,8 +9,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 })
 export class FormComponent {
 
-  @Input() public formFields: any;
-
+  @Input() public formFields: IFormField[];
   @Output() public submitted: EventEmitter<any> = new EventEmitter();
 
   public profileForm: any = new FormGroup({

@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -16,12 +16,26 @@ import { DefaultMarkPipe } from "./common/pipes/default-mark.pipe";
 
 import { SharedModule } from "./shared/shared.module";
 
-import { NgRedux, NgReduxModule } from "@angular-redux/store";
-import { IAppState, rootReducer, INITIAL_STATE } from "./store";
-
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+
+import { environment } from "src/environments/environment";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { StoreModule } from "@ngrx/store";
+
+import { appReducer } from "./store/reducers/app.reducer";
+import { StatisticComponent } from "./components/statistic/statistic.component";
+
+import { NgSelectModule } from "@ng-select/ng-select";
+import { MessageComponent } from "./components/message/message.component";
+
+import { EffectsModule } from "@ngrx/effects";
+import { SubjectEffects } from "./store/effects/subject.effects";
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { StudentEffects } from "./store/effects/student.effects";
 
 @NgModule({
   declarations: [
@@ -31,36 +45,38 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     SubjectTableComponent,
     SortingStudentsPipe,
     PartyTimePipe,
-    DefaultMarkPipe
+    DefaultMarkPipe,
+    StatisticComponent,
+    MessageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgReduxModule,
     HttpClientModule,
+    StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot([SubjectEffects, StudentEffects]),
+    StoreRouterConnectingModule.forRoot({stateKey: "router"}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    NgSelectModule
   ],
   providers: [],
+  entryComponents: [MessageComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(
-      rootReducer,
-      INITIAL_STATE
-    );
-  }
-}
+export class AppModule {}
 
-export function HttpLoaderFactory(http: HttpClient){
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }

@@ -1,58 +1,55 @@
 import { Component, OnInit } from "@angular/core";
-import { NgRedux, select } from "@angular-redux/store";
+import { IStudent } from "../../common/entities";
+import { ButtonType, IButton } from "../../shared/components/button/button.model";
 
-import { Student } from "../../common/entities";
+import { Store, select } from "@ngrx/store";
+import { IAppState } from "../../store/state/app.state";
 
-import { DbService } from "../../common/services/db.service";
-
-import { IAppState } from "../../store";
-import { REMOVE_ALL_STUDENTS, ADD_STUDENT } from "../../actions";
-
-import { ButtonType, Button } from "../../shared/components/button/button.module";
+import { StudentService } from "src/app/common/services/students.service";
+import { IFormField } from "src/app/shared/components/form/form.model";
 
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
-  styleUrls: ["./students.component.scss"]
+  styleUrls: ["./students.component.scss"],
+  providers: [ StudentService ]
 })
 export class StudentsComponent implements OnInit {
 
-  private button: Button = {
+  private button: IButton = {
     class: ButtonType.Add
   };
 
-  private formFields: any[] = [
+  private formFields: IFormField[] = [
     { label: "Name", isRequired: true, id: "name" },
     { label: "Last Name", isRequired: true, id: "lastName" },
     { label: "Address", isRequired: false, id: "address" }
   ];
 
-  @select() public students: Student[];
+  public students: IStudent[];
 
   public path: string[] = ["students"];
   public order: number = -1;
 
   constructor(
-    private dbService: DbService,
-    private ngRedux: NgRedux<IAppState>
-  ) { }
-
-  // public students: Student[];
+    private _store: Store<IAppState>,
+    private studentService: StudentService
+  ) {}
 
   public ngOnInit(): void {
-    // this.getStudents();
+    this._store.select("students", "students")
+      .subscribe(data => this.students = data);
   }
 
-  // public getStudents(): void {
-  //   this.dbService.getStudents()
-  //     .subscribe(students => this.students = students);
-  // }
-
-  public addStudent(student: Student): void {
-    this.ngRedux.dispatch({type: ADD_STUDENT, student: student});
-
-    // this.dbService.addStudent(student)
-    //   .subscribe(students => this.students = students);
+  public addStudent(student: IStudent): void {
+    let _student: IStudent = {
+      id: student.id,
+      name: student.name,
+      lastName: student.lastName,
+      description: student.description,
+      address: student.address,
+    };
+    this.studentService.addStudent(_student);
   }
 
   public sortTable(prop: string): boolean {
@@ -61,7 +58,4 @@ export class StudentsComponent implements OnInit {
     return false;
   }
 
-  public clearStudents(): void {
-    this.ngRedux.dispatch({type: REMOVE_ALL_STUDENTS});
-  }
 }

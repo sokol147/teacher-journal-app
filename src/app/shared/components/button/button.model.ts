@@ -1,5 +1,5 @@
-export class Button {
-  public class: string;
+export interface IButton {
+  class: string;
 }
 
 export enum ButtonType {

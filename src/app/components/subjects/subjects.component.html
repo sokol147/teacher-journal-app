@@ -1,14 +1,14 @@
 <div class="subject__wrapper">
-  <h2>{{ 'subjects.title' | translate}}</h2>
+  <h2>{{ 'subjectsTitle' | translate}}</h2>
   <ul class="subject__list" *ngIf="!formVis">
-    <li class="subject__item" *ngFor="let subject of subjects | async">
+    <li class="subject__item" *ngFor="let subject of subjects">
       <a routerLink="/subject/{{subject.name}}" class="subject__link">
         {{subject.name}}
       </a>
     </li>
   </ul>
   <app-form [formFields]="formFields" *ngIf="formVis" (submitted)="addSubject($event)">
-    <h3 class="form__title">{{ 'subjects.formTitle' | translate}}</h3>
+    <h3 class="form__title">{{ 'subjectsFormTitle' | translate}}</h3>
   </app-form>
   <app-button
     (click)="formVis = !formVis"

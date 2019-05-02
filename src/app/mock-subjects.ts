@@ -1,44 +1,29 @@
-import { Subject } from "./common/entities";
+import { ISubject } from "./common/entities";
 
-export const SUBJECTS: Subject[] = [
+export const SUBJECTS: ISubject[] = [
   {
     id: 1,
     name: "Biology",
     teacher: "Ms. Poison",
     cabinet: 10,
     description: "Know evolution theory",
-    date: [ "" ],
+    date: [],
     students: [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }
     ]
   },
@@ -48,38 +33,23 @@ export const SUBJECTS: Subject[] = [
     teacher: "Mr. Plus",
     cabinet: 14,
     description: "",
-    date: [ "" ],
+    date: [],
     students: [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }
     ]
   },
@@ -89,38 +59,23 @@ export const SUBJECTS: Subject[] = [
     teacher: "Mr. Napoleon",
     cabinet: 10,
     description: "Hate russian winter",
-    date: [ "" ],
+    date: [],
     students: [
       {
         name: "Max",
         lastName: "Pain",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }, {
         name: "Luck",
         lastName: "Osm",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }, {
         name: "Julia",
         lastName: "Fix",
-        averageMark: undefined,
-        marks: [
-          {
-            day: "",
-            mark: ""
-          }
-        ]
+        averageMark: null,
+        marks: []
       }
     ]
   },

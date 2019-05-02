@@ -1,22 +1,23 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-
-import { Student } from "../entities";
-import { STUDENTS } from "../../mock-students";
+import { IAppState } from "src/app/store/state/app.state";
+import { Store, select } from "@ngrx/store";
+import { AddStudent } from "../../store/actions/student.actions";
+import { AppComponent } from "src/app/root/app.component";
+import { IStudent } from "../entities";
 
 @Injectable({
   providedIn: "root"
 })
 export class StudentService {
 
-  public getStudents(): Observable<Student[]> {
-    return of(STUDENTS);
-  }
+  constructor(
+    private _store: Store<IAppState>,
+    private appComponent: AppComponent
+  ) {}
 
-  public addStudent(student: Student): Observable<Student[]> {
-    student.id = STUDENTS.length + 1;
-    STUDENTS.push(student);
-    return of(STUDENTS);
+  public addStudent(student: IStudent): void {
+    this._store.dispatch(new AddStudent(student));
+    this.appComponent.createComponent("Student successfuly added", "success");
   }
 
 }
