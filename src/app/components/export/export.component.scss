@@ -1,0 +1,31 @@
+@import '../../../assets/style/variables.scss';
+
+.container{
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.export{
+  &__list{
+    list-style-type: none;
+    margin: 0;
+    padding: 1.5rem 0;
+  }
+  &__item{
+    margin-bottom: 1rem;
+  }
+  &__btn{
+    background: $lightGrey;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: $white;
+    cursor: pointer;
+    transition: .3s;
+    &:hover{
+      background: darken($lightGrey, 10%);
+      color: $orange;
+    }
+  }
+}
