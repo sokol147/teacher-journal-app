@@ -36,6 +36,7 @@
         <ul>
           <li *ngFor="let res of subj.result">{{res.name}} {{res.lastName}} got {{res.mark}}</li>
         </ul>
+        <span *ngIf="subj.result.length === 0">Students do not have {{subj.name}} grades on this day</span>
       </li>
     </ul>
   </div>
