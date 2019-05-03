@@ -24,11 +24,12 @@ export class StatisticComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private statService: StatisticService,
-    private _store: Store<IAppState>
+    private _store: Store<IAppState>,
   ) {}
 
   subjectDates = [];
   uniqDates = [];
+  chartData;
 
   public ngOnInit(): void {
     this._store.select("subjects", "subjects")
@@ -51,6 +52,7 @@ export class StatisticComponent implements OnInit {
   public onChanges(): void {
     this.statisticForm.valueChanges.subscribe(val => {
       this.renderStatistic(val.subject, val.date);
+      this.renderChart(val.subject);
     });
   }
 
@@ -60,5 +62,11 @@ export class StatisticComponent implements OnInit {
         this.result = res[0];
         this.infoMessage = res[1];
       });
+  }
+  public renderChart(subjects): void{
+    this.statService.getChart(subjects)
+      .subscribe(res => {
+        this.chartData = res;
+      })
   }
 }
