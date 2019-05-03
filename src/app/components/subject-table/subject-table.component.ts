@@ -9,7 +9,7 @@ import { SubjectService } from "src/app/common/services/subjects.service";
 import { AppComponent } from "src/app/root/app.component";
 import { GetSubject } from "src/app/store/actions/subject.actions";
 import { IAppState } from "src/app/store/state/app.state";
-import * as _ from "lodash/lang";
+import * as _ from "lodash";
 
 @Component({
   selector: "app-subject-table",
@@ -49,10 +49,26 @@ export class SubjectTableComponent implements OnInit {
     this.subjectService.getCurrentDate()
       .subscribe(date => this.currentDate = date);
 
-    this.selectedSubject$.date.push({day: this.currentDate});
-    this.selectedSubject$.students.forEach(student => {
-      student.marks.push({ day: this.currentDate, mark: "" });
-    });
+    if(this.selectedSubject$.date.length === 0){
+      this.selectedSubject$.date.push({day: this.currentDate});
+      this.selectedSubject$.students.forEach(student => {
+        student.marks.push({ day: this.currentDate, mark: "" });
+      });
+    } else {
+      let lastLessonDate = this.selectedSubject$.date[this.selectedSubject$.date.length - 1].day
+
+      if(lastLessonDate === this.currentDate || lastLessonDate === ""){
+        this.selectedSubject$.date.push({day: ""});
+        this.selectedSubject$.students.forEach(student => {
+          student.marks.push({ day: "", mark: "" });
+        });
+      } else {
+        this.selectedSubject$.date.push({day: this.currentDate});
+        this.selectedSubject$.students.forEach(student => {
+          student.marks.push({ day: this.currentDate, mark: "" });
+        });
+      }
+    }
   }
 
   public calcAverage(): void {
@@ -70,6 +86,10 @@ export class SubjectTableComponent implements OnInit {
 
   public saveSubject(): void {
     let initialSubjectsState: ISubject[] = JSON.parse(localStorage.getItem("subjects"));
+    if ( _.some(this.selectedSubject$.date, {day: ""}) ){
+      this.appComponent.createComponent("Enter all dates", "error");
+      return;
+    }
     if (_.isEqual(initialSubjectsState, this.subjects$)) {
       this.appComponent.createComponent("Nothing is changed", "error");
     } else {
