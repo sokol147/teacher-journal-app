@@ -41,3 +41,6 @@
     </ul>
   </div>
 </div>
+<div class="d3js" *ngIf="chartData.length >= 1">
+  <app-bar-chart [data]="chartData"></app-bar-chart>
+</div>
