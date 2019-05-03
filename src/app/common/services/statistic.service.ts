@@ -10,6 +10,11 @@ export interface ITmprStudent {
   mark: string;
 }
 
+export interface IChartSubject {
+  subject: string;
+  averageMark: string;
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -53,7 +58,30 @@ export class StatisticService {
         result.push(subjectResult)
       })
     }
-
     return of([result, message]);
+  }
+
+  getChart(subjects): Observable<IChartSubject[]>{
+    let result = [];
+    if(subjects){
+      subjects.forEach(subject => {
+        let averageMarks = []
+        subject.students.forEach(student => {
+          if(!isNaN(student.averageMark) && student.averageMark !== null){
+            averageMarks.push(student.averageMark)
+          }
+        })
+        if(averageMarks.length === 0) return result;
+        let averageMark = (averageMarks.reduce((sum, current) => {
+          return +sum + +current
+        }) / averageMarks.length).toFixed(1).toString();
+        let tempResult = {
+          subject: subject.name,
+          averageMark: averageMark
+        }
+        result.push(tempResult);
+      })
+    }
+    return of(result);
   }
 }
