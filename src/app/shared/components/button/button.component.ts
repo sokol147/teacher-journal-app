@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 import { IButton, ButtonType } from "./button.model";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: "app-button",
@@ -8,6 +9,8 @@ import { IButton, ButtonType } from "./button.model";
   styleUrls: ["./button.component.scss"],
 })
 export class ButtonComponent {
+
+  constructor(private tsService: TranslateService) {}
 
   @Input() public type: IButton;
 
@@ -19,7 +22,7 @@ export class ButtonComponent {
         this.text = "+";
         break;
       case ButtonType.Save:
-        this.text = "save";
+        this.text = this.tsService.instant("buttonsave");
         break;
       case ButtonType.Plus:
         this.text = "+";
