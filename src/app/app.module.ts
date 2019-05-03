@@ -36,6 +36,8 @@ import { EffectsModule } from "@ngrx/effects";
 import { SubjectEffects } from "./store/effects/subject.effects";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { StudentEffects } from "./store/effects/student.effects";
+import { ExportComponent } from './components/export/export.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { StudentEffects } from "./store/effects/student.effects";
     DefaultMarkPipe,
     StatisticComponent,
     MessageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ExportComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
