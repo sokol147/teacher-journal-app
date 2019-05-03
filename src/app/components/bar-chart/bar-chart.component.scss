@@ -1,0 +1,14 @@
+@import '../../../assets/style/variables.scss';
+
+.bar{
+  fill: $orange;
+  transition: .3s;
+  &:hover{
+    fill: darken($orange, 10%);
+  }
+}
+.char{
+  text{
+    fill: black;
+  }
+}
