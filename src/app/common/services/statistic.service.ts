@@ -27,60 +27,60 @@ export class StatisticService {
     let result = [];
     let message: string = "";
 
-    if(!subjects && !day) {
+    if (!subjects && !day) {
       result = [];
     }
 
-    if(subjects && !day){
+    if (subjects && !day) {
       message = this.tsService.instant("infoMessage");
       result = [];
     }
 
-    if(subjects && day){
+    if (subjects && day) {
       subjects.forEach(subject => {
         let subjectResult = {
           name: subject.name,
           result: []
-        }
+        };
         subject.students.forEach(student => {
           student.marks.forEach(date => {
-            if(date.day === day && date.mark !== ""){
+            if (date.day === day && date.mark !== "") {
               subjectResult.result.push(
                 {
                   name: student.name,
                   lastName: student.lastName,
                   mark: date.mark
                 }
-              )
+              );
             }
-          })
-        })
-        result.push(subjectResult)
-      })
+          });
+        });
+        result.push(subjectResult);
+      });
     }
     return of([result, message]);
   }
 
-  getChart(subjects): Observable<IChartSubject[]>{
+  public getChart(subjects): Observable<IChartSubject[]> {
     let result = [];
-    if(subjects){
+    if (subjects) {
       subjects.forEach(subject => {
-        let averageMarks = []
+        let averageMarks: number[] = [];
         subject.students.forEach(student => {
-          if(!isNaN(student.averageMark) && student.averageMark !== null){
-            averageMarks.push(student.averageMark)
+          if (!isNaN(student.averageMark) && student.averageMark !== null) {
+            averageMarks.push(student.averageMark);
           }
-        })
-        if(averageMarks.length === 0) return result;
-        let averageMark = (averageMarks.reduce((sum, current) => {
-          return +sum + +current
+        });
+        if (averageMarks.length === 0) { return result; }
+        let averageMark: string = (averageMarks.reduce((sum, current) => {
+          return +sum + +current;
         }) / averageMarks.length).toFixed(1).toString();
         let tempResult = {
           subject: subject.name,
           averageMark: averageMark
-        }
+        };
         result.push(tempResult);
-      })
+      });
     }
     return of(result);
   }

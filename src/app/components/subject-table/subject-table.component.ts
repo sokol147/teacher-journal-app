@@ -18,7 +18,7 @@ import * as _ from "lodash";
 })
 export class SubjectTableComponent implements OnInit {
 
-  private subjects$;
+  private subjects$: ISubject[];
   private selectedSubject$;
 
   private button: IButton = {
@@ -49,15 +49,15 @@ export class SubjectTableComponent implements OnInit {
     this.subjectService.getCurrentDate()
       .subscribe(date => this.currentDate = date);
 
-    if(this.selectedSubject$.date.length === 0){
+    if (this.selectedSubject$.date.length === 0) {
       this.selectedSubject$.date.push({day: this.currentDate});
       this.selectedSubject$.students.forEach(student => {
         student.marks.push({ day: this.currentDate, mark: "" });
       });
     } else {
-      let lastLessonDate = this.selectedSubject$.date[this.selectedSubject$.date.length - 1].day
+      let lastLessonDate = this.selectedSubject$.date[this.selectedSubject$.date.length - 1].day;
 
-      if(lastLessonDate === this.currentDate || lastLessonDate === ""){
+      if (lastLessonDate === this.currentDate || lastLessonDate === "") {
         this.selectedSubject$.date.push({day: ""});
         this.selectedSubject$.students.forEach(student => {
           student.marks.push({ day: "", mark: "" });
@@ -86,7 +86,7 @@ export class SubjectTableComponent implements OnInit {
 
   public saveSubject(): void {
     let initialSubjectsState: ISubject[] = JSON.parse(localStorage.getItem("subjects"));
-    if ( _.some(this.selectedSubject$.date, {day: ""}) ){
+    if ( _.some(this.selectedSubject$.date, {day: ""}) ) {
       this.appComponent.createComponent("Enter all dates", "error");
       return;
     }

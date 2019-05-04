@@ -1,9 +1,9 @@
 import { BehaviorSubject, Observable } from "rxjs";
 
-export class fakeStore<T> {
+export class FakeStore<T> {
   private state: BehaviorSubject<T> = new BehaviorSubject(undefined);
 
-  public setState(data: T) {
+  public setState(data: T): void {
     this.state.next(data);
   }
 
@@ -11,5 +11,5 @@ export class fakeStore<T> {
     return this.state.asObservable();
   }
 
-  public despatch(action: any) {}
+  public despatch(action: any): void { return; }
 }

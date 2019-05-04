@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 import { IButton, ButtonType } from "./button.model";
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-button",
@@ -10,11 +10,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ButtonComponent {
 
-  constructor(private tsService: TranslateService) {}
-
   @Input() public type: IButton;
 
   public text: string = "";
+
+  constructor(private tsService: TranslateService) {}
 
   public ngOnInit(): void {
     switch (this.type.class) {

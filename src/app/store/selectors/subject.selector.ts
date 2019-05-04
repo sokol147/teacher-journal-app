@@ -1,16 +1,16 @@
-import { createSelector } from "@ngrx/store";
+import { createSelector, MemoizedSelector } from "@ngrx/store";
 
-import { IAppState } from "../state/app.state";
 import { ISubjectState } from "../state/subject.state";
+import { ISubject } from "src/app/common/entities";
 
 const selectSubjects = (state) => state.subjects;
 
-export const selectSubjectList = createSelector(
+export const selectSubjectList: MemoizedSelector<any, any> = createSelector(
   selectSubjects,
   (state) => state.subjects
 );
 
-export const selectSelectedSubject = createSelector(
+export const selectSelectedSubject: MemoizedSelector<any, ISubject> = createSelector(
   selectSubjects,
   (state: ISubjectState) => state.selectedSubject
 );

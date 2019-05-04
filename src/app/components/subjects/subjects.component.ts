@@ -27,7 +27,7 @@ export class SubjectsComponent implements OnInit {
     class: ButtonType.Add
   };
 
-  public subjects;
+  public subjects: ISubject[];
 
   constructor(
     private _store: Store<IAppState>,

@@ -7,7 +7,7 @@ import { StatisticService } from "../../common/services/statistic.service";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/store/state/app.state";
 
-import * as _ from 'lodash/array';
+import * as _ from "lodash/array";
 
 @Component({
   selector: "app-statistic",
@@ -21,15 +21,15 @@ export class StatisticComponent implements OnInit {
   public subjects: ISubject[];
   public infoMessage: string;
   public result: any[];
+
+  public subjectDates = [];
+  public uniqDates = [];
+  public chartData;
   constructor(
     private fb: FormBuilder,
     private statService: StatisticService,
     private _store: Store<IAppState>,
   ) {}
-
-  subjectDates = [];
-  uniqDates = [];
-  chartData;
 
   public ngOnInit(): void {
     this._store.select("subjects", "subjects")
@@ -44,9 +44,9 @@ export class StatisticComponent implements OnInit {
     this.subjects.forEach(subject => {
       subject.date.forEach(day => {
         this.subjectDates.push(day);
-      })
-    })
-    this.uniqDates = _.uniqBy(this.subjectDates, 'day');
+      });
+    });
+    this.uniqDates = _.uniqBy(this.subjectDates, "day");
   }
 
   public onChanges(): void {
@@ -63,10 +63,10 @@ export class StatisticComponent implements OnInit {
         this.infoMessage = res[1];
       });
   }
-  public renderChart(subjects): void{
+  public renderChart(subjects): void {
     this.statService.getChart(subjects)
       .subscribe(res => {
         this.chartData = res;
-      })
+      });
   }
 }

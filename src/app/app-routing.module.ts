@@ -5,7 +5,7 @@ import { SubjectsComponent } from "./components/subjects/subjects.component";
 import { SubjectTableComponent } from "./components/subject-table/subject-table.component";
 import { StatisticComponent } from "./components/statistic/statistic.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-import { ExportComponent } from './components/export/export.component';
+import { ExportComponent } from "./components/export/export.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/students", pathMatch: "full"},

@@ -8,8 +8,8 @@ import { FakeTranslatePipe } from "../common/pipes/fake-translate.pipe";
 
 const fakeTranslateService = {
   instant: (value) => "there was no",
-  setDefaultLang: () => {},
-  get: () => {}
+  setDefaultLang: () => { return },
+  get: () => { return }
 };
 
 describe("AppComponent", () => {
