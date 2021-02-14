@@ -1,6 +1,6 @@
-import { DB}  from "./common/entities";
+import { IDB}  from "./common/entities";
 
-export const DATABASE: DB = {
+export const DATABASE: IDB = {
   students: [
     {
       id: 1,

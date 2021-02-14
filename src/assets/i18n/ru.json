@@ -1,42 +1,28 @@
 {
   "title": "Журнал Учителя",
-  "nav": {
-    "students": "Студенты",
-    "subjects": "Предметы"
-  },
-  "studentsTable": {
-    "id": "Ид",
-    "name": "Имя",
-    "lastName": "Фамилия",
-    "address": "Адрес",
-    "description": "Описание"
-  },
-  "students": {
-    "formTitle": "Добавить студента"
-  },
-  "subjectsTable": {
-    "name": "Имя",
-    "lastName": "Фамилия",
-    "averageMark": "Средний бал",
-    "teacherNameLabel": "Учитель:",
-    "placeholderMark": "Введите оценку",
-    "placeholderDate": "Введите дату"
-  },
-  "subjects": {
-    "title": "Список предметов:",
-    "formTitle": "Добавить предмет"
-  },
-  "form": {
-    "buttonText": "Добавить",
-    "descriptionTextareaLabel": "Описание",
-    "inputLabelname": "Имя",
-    "inputLabellastName": "Фамилия",
-    "inputLabeladdress": "Адрес",
-    "inputLabelteacher": "Учитель",
-    "inputLabelcabinet": "Кабинет"
-  },
-  "button": {
-    "buttonsave": "Сохранить",
-    "button+": "+"
-  }
+  "students": "Студенты",
+  "subjects": "Предметы",
+  "statistic": "Статистика",
+  "id": "Ид",
+  "name": "Имя",
+  "lastName": "Фамилия",
+  "address": "Адрес",
+  "cabinet": "Кабинет",
+  "description": "Описание",
+  "studentsFormTitle": "Добавить студента",
+  "averageMark": "Средняя оценка",
+  "teacher": "Учитель",
+  "placeholderMark": "Введите оценку",
+  "placeholderDate": "Введите дату",
+  "subjectsTitle": "Список предметов:",
+  "subjectsFormTitle": "Добавить предмет",
+  "buttonText": "Добавить",
+  "inputLabelcabinet": "Кабинет",
+  "buttonsave": "Сохранить",
+  "button+": "+",
+  "selectSubject": "Выберете предмет",
+  "selectDate": "Выберете дату",
+  "message": "студент(ы) получили оценку в этот день",
+  "infoMessage": "выберете дату",
+  "infoMessageNoSubject": "не было"
 }

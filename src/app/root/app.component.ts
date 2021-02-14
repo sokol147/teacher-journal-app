@@ -1,4 +1,11 @@
-import { Component } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  ViewContainerRef,
+  ComponentFactoryResolver
+} from "@angular/core";
+
+import { MessageComponent } from "../components/message/message.component";
 
 import { TranslateService } from "@ngx-translate/core";
 
@@ -9,14 +16,35 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AppComponent {
 
-  constructor(private translate: TranslateService){
-    translate.setDefaultLang("en");
-  }
+  @ViewChild("messagecontainer", { read: ViewContainerRef })
+  public entry: ViewContainerRef;
+  public componentRef: any;
 
   public title: string = "Teacher Journal";
 
-  useLanguage(language: string) {
+  constructor(
+    private translate: TranslateService,
+    private resolver: ComponentFactoryResolver
+  ) {
+    translate.setDefaultLang("en");
+  }
+
+  public useLanguage(language: string): void {
     this.translate.use(language);
   }
 
+  public createComponent(message: string, type: string): void {
+    this.entry.clear();
+    const factory: any = this.resolver.resolveComponentFactory(MessageComponent);
+    this.componentRef = this.entry.createComponent(factory);
+    this.componentRef.instance.message = message;
+    this.componentRef.instance.type = type;
+    setTimeout(() => {
+      this.destroyComponent();
+    },         5000);
+  }
+
+  public destroyComponent(): void {
+    this.componentRef.destroy();
+  }
 }

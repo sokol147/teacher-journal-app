@@ -1,0 +1,21 @@
+@import '../../../assets/style/variables.scss';
+
+.notification{
+  padding: 1rem;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  border: 4px solid $white;
+  border-radius: 5px;
+  font-weight: bold;
+  &.success{
+    background: $success;
+    border: 4px solid darken($success, 20%);
+    color: darken($success, 20%);
+  }
+  &.error{
+    background: $error;
+    border: 4px solid darken($error, 20%);
+    color: darken($error, 20%);
+  }
+}

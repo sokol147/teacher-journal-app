@@ -1,0 +1,35 @@
+<div>
+  <form 
+    [formGroup]="statisticForm"
+    (change)="onChanges()"
+    >
+    <div class="select__wrapper">
+      <label class="select__label">{{ 'selectSubject' | translate }}</label>
+      <ng-select
+        formControlName="subject"
+        [items]="subjects"
+        bindLabel="name"
+        placeholder="{{ 'selectSubject' | translate }}"
+        [(ngModel)]="selectedSubject">
+      </ng-select>
+    </div>
+    <div class="select__wrapper" *ngIf="selectedSubject">
+      <label class="select__label">{{ 'selectDate' | translate }}</label>
+      <ng-select
+        formControlName="date"
+        [items]="selectedSubject.date"
+        bindValue="day"
+        bindLabel="day"
+        placeholder="{{ 'selectDate' | translate }}"
+        [(ngModel)]="selectedDay">
+      </ng-select>
+      <p class="info__message">{{infoMessage}}</p>
+    </div>
+  </form>
+  <div *ngIf="result.length > 0" class="statistic__result">
+    <p>{{result.length}} {{ 'message' | translate }}</p>
+    <ul>
+      <li *ngFor="let student of result">{{student.name}} {{student.lastName}} - {{student.mark}}</li>
+    </ul>
+  </div>
+</div>

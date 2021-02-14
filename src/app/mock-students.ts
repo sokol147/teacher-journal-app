@@ -1,6 +1,6 @@
-import { Student } from "./common/entities";
+import { IStudent } from "./common/entities";
 
-export const STUDENTS: Student[] = [
+export const STUDENTS: IStudent[] = [
   {
     id: 1,
     name: "Max",

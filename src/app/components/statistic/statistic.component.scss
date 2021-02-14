@@ -1,0 +1,25 @@
+@import '../../../assets/style/variables.scss';
+
+.select{
+  &__wrapper{
+    width: 50%;
+    margin: 0 auto;
+    padding: 1rem 0
+  }
+  &__label{
+    margin-bottom: 1rem;
+    display: block;
+  }
+}
+
+.info__message{
+  font-size: 14px;
+  margin-top: 5px;
+  margin-left: 5px;
+  color: $orange
+}
+
+.statistic__result{
+  width: 50%;
+  margin: 0 auto;
+}
